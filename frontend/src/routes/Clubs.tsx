@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Clubs = () => {
   const [allClubs, setClubs] = useState([]);
@@ -14,7 +15,7 @@ const Clubs = () => {
       <h1>Liste aller Vereine</h1>
 
       {allClubs.map((club) => (
-        <div key={club.id}>
+        <Link key={club.id} to={`/vereine/${club.id}`}>
           {club.logo?.url && (
             <img
               src={`http://localhost:1337${club.logo.url}`}
@@ -22,8 +23,8 @@ const Clubs = () => {
               width={100}
             />
           )}
-          <a>{club.name}</a>
-        </div>
+          {club.name}
+        </Link>
       ))}
     </>
   );
