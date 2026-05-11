@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_adresse_adresses",
+  "info": {
+    "displayName": "Adresse",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

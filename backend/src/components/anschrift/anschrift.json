@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_anschrift_anschrifts",
+  "info": {
+    "displayName": "Anschrift",
+    "icon": "pinMap"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "component",
+      "component": "adresse.adresse",
+      "repeatable": false
+    },
+    "phone": {
+      "type": "string"
+    },
+    "mobile": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    }
+  },
+  "config": {}
+}

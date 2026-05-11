@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "vereins",
+  "info": {
+    "singularName": "verein",
+    "pluralName": "vereins",
+    "displayName": "Verein"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "website": {
+      "type": "string",
+      "regex": "^(https?:\\/\\/)?([\\w.-]+)\\.([a-z]{2,})(:\\d+)?(\\/[^\\s]*)?$"
+    },
+    "founded": {
+      "type": "date"
+    },
+    "president": {
+      "type": "component",
+      "component": "anschrift.anschrift",
+      "repeatable": false
+    },
+    "mailing": {
+      "type": "component",
+      "component": "anschrift.anschrift",
+      "repeatable": false
+    }
+  }
+}
