@@ -1,8 +1,43 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: Archivo, Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-.font-grotesk {
-  font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
+  --color-ink: #0B0F17;
+  --color-panel: #111722;
+  --color-paper: #F4F2EF;
+  --color-body: #D8D5D0;
+  --color-muted: #9AA3B0;
+  --color-dim: #6E7787;
+  --color-brand: #8C1210;
+  --color-accent: #D8261C;
+  --color-accent-hover: #E8443B;
+  --color-line: rgb(255 255 255 / 0.14);
+  --color-line-soft: rgb(255 255 255 / 0.10);
+  --color-on-brand: #F3D8D6;
+  --color-on-brand-label: #F3BDBA;
+  --color-on-brand-soft: #F6E4E2;
+  --color-line-strong: rgb(255 255 255 / 0.18);
+  --color-hero-text: #E4E1DC;
+  --color-hero-label: #DCE3EE;
+  --color-overlay-ink: rgb(11 15 23 / 0.35);
+  --color-overlay-ink-strong: rgb(11 15 23 / 0.78);
+  --color-overlay-navy: rgb(9 22 48 / 0.85);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    line-height: 1.5;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-accent-hover);
+  }
 }

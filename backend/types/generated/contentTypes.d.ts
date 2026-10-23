@@ -430,6 +430,166 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAlbumAlbum extends Struct.CollectionTypeSchema {
+  collectionName: 'albums';
+  info: {
+    displayName: 'Album';
+    pluralName: 'albums';
+    singularName: 'album';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::album.album'> &
+      Schema.Attribute.Private;
+    preview: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String;
+    veranstaltung: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::veranstaltung.veranstaltung'
+    >;
+  };
+}
+
+export interface ApiDerBscvDerBscv extends Struct.SingleTypeSchema {
+  collectionName: 'der_bscvs';
+  info: {
+    displayName: 'Der BSCV';
+    pluralName: 'der-bscvs';
+    singularName: 'der-bscv';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    classesTitle: Schema.Attribute.String;
+    classGroups: Schema.Attribute.Component<
+      'klassengruppe.klassengruppe',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    fascination: Schema.Attribute.Text;
+    fascinationTitle: Schema.Attribute.String;
+    intro: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::der-bscv.der-bscv'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDokumentDokument extends Struct.CollectionTypeSchema {
+  collectionName: 'dokumente';
+  info: {
+    displayName: 'Dokument';
+    pluralName: 'dokumente';
+    singularName: 'dokument';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    file: Schema.Attribute.Media<'files'>;
+    group: Schema.Attribute.String;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::dokument.dokument'
+    > &
+      Schema.Attribute.Private;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEinstellungEinstellung extends Struct.SingleTypeSchema {
+  collectionName: 'einstellungen';
+  info: {
+    displayName: 'Einstellung';
+    pluralName: 'einstellungen';
+    singularName: 'einstellung';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    classCount: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    founded: Schema.Attribute.Integer;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::einstellung.einstellung'
+    > &
+      Schema.Attribute.Private;
+    mylapsUrl: Schema.Attribute.String;
+    officeEmail: Schema.Attribute.Email;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiFunktionaerFunktionaer extends Struct.CollectionTypeSchema {
+  collectionName: 'funktionaere';
+  info: {
+    displayName: 'Funktion\u00E4r';
+    pluralName: 'funktionaere';
+    singularName: 'funktionaer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    club: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::funktionaer.funktionaer'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    photo: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomeHome extends Struct.SingleTypeSchema {
   collectionName: 'homes';
   info: {
@@ -486,6 +646,196 @@ export interface ApiPostPost extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPunktewertungPunktewertung
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'punktewertungen';
+  info: {
+    displayName: 'Punktewertung';
+    pluralName: 'punktewertungen';
+    singularName: 'punktewertung';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::punktewertung.punktewertung'
+    > &
+      Schema.Attribute.Private;
+    pdf: Schema.Attribute.Media<'files'>;
+    publishedAt: Schema.Attribute.DateTime;
+    sorting: Schema.Attribute.Integer;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiRennstreckeRennstrecke extends Struct.CollectionTypeSchema {
+  collectionName: 'rennstrecken';
+  info: {
+    displayName: 'Rennstrecke';
+    pluralName: 'rennstrecken';
+    singularName: 'rennstrecke';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    address: Schema.Attribute.Component<'adresse.adresse', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    latitude: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 90;
+          min: -90;
+        },
+        number
+      >;
+    lengthMeters: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rennstrecke.rennstrecke'
+    > &
+      Schema.Attribute.Private;
+    longitude: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 180;
+          min: -180;
+        },
+        number
+      >;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    photo: Schema.Attribute.Media<'images'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSeiteSeite extends Struct.CollectionTypeSchema {
+  collectionName: 'seiten';
+  info: {
+    displayName: 'Seite';
+    pluralName: 'seiten';
+    singularName: 'seite';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    content: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::seite.seite'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSeitentextSeitentext extends Struct.SingleTypeSchema {
+  collectionName: 'seitentexte';
+  info: {
+    description: 'Einleitungen der Seiten und Texte der Kacheln. In der Vereine-Einleitung wird {anzahl} durch die Zahl der Vereine ersetzt.';
+    displayName: 'Seitentexte';
+    pluralName: 'seitentexte';
+    singularName: 'seitentext';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    albumsIntro: Schema.Attribute.Text;
+    clubsIntro: Schema.Attribute.Text;
+    contactIntro: Schema.Attribute.Text;
+    copyright: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    licenseTileLink: Schema.Attribute.String;
+    licenseTileText: Schema.Attribute.Text;
+    licenseTileTitle: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::seitentext.seitentext'
+    > &
+      Schema.Attribute.Private;
+    notFoundIntro: Schema.Attribute.Text;
+    officeTileText: Schema.Attribute.Text;
+    officeTileTitle: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    racesIntro: Schema.Attribute.Text;
+    standingsIntro: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiVeranstaltungVeranstaltung
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'veranstaltungen';
+  info: {
+    displayName: 'Veranstaltung';
+    pluralName: 'veranstaltungen';
+    singularName: 'veranstaltung';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    albums: Schema.Attribute.Relation<'oneToMany', 'api::album.album'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::veranstaltung.veranstaltung'
+    > &
+      Schema.Attribute.Private;
+    organiser: Schema.Attribute.Relation<'manyToOne', 'api::verein.verein'>;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    track: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::rennstrecke.rennstrecke'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiVereinVerein extends Struct.CollectionTypeSchema {
   collectionName: 'vereins';
   info: {
@@ -498,6 +848,7 @@ export interface ApiVereinVerein extends Struct.CollectionTypeSchema {
   };
   attributes: {
     about: Schema.Attribute.RichText;
+    colors: Schema.Attribute.Component<'farbe.farbe', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -509,15 +860,49 @@ export interface ApiVereinVerein extends Struct.CollectionTypeSchema {
       'api::verein.verein'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     mailing: Schema.Attribute.Component<'anschrift.anschrift', false>;
     name: Schema.Attribute.String;
     president: Schema.Attribute.Component<'anschrift.anschrift', false>;
     publishedAt: Schema.Attribute.DateTime;
+    sortName: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    vehicleGraphic: Schema.Attribute.Media<'images'>;
     website: Schema.Attribute.String;
+  };
+}
+
+export interface ApiVorstandVorstand extends Struct.CollectionTypeSchema {
+  collectionName: 'vorstaende';
+  info: {
+    displayName: 'Vorstand';
+    pluralName: 'vorstaende';
+    singularName: 'vorstand';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    contact: Schema.Attribute.Component<'anschrift.anschrift', false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::vorstand.vorstand'
+    > &
+      Schema.Attribute.Private;
+    photo: Schema.Attribute.Media<'images'>;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1032,9 +1417,20 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::album.album': ApiAlbumAlbum;
+      'api::der-bscv.der-bscv': ApiDerBscvDerBscv;
+      'api::dokument.dokument': ApiDokumentDokument;
+      'api::einstellung.einstellung': ApiEinstellungEinstellung;
+      'api::funktionaer.funktionaer': ApiFunktionaerFunktionaer;
       'api::home.home': ApiHomeHome;
       'api::post.post': ApiPostPost;
+      'api::punktewertung.punktewertung': ApiPunktewertungPunktewertung;
+      'api::rennstrecke.rennstrecke': ApiRennstreckeRennstrecke;
+      'api::seite.seite': ApiSeiteSeite;
+      'api::seitentext.seitentext': ApiSeitentextSeitentext;
+      'api::veranstaltung.veranstaltung': ApiVeranstaltungVeranstaltung;
       'api::verein.verein': ApiVereinVerein;
+      'api::vorstand.vorstand': ApiVorstandVorstand;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

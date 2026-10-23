@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "der_bscvs",
+  "info": {
+    "singularName": "der-bscv",
+    "pluralName": "der-bscvs",
+    "displayName": "Der BSCV"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "intro": {
+      "type": "text"
+    },
+    "fascinationTitle": {
+      "type": "string"
+    },
+    "fascination": {
+      "type": "text"
+    },
+    "classesTitle": {
+      "type": "string"
+    },
+    "classGroups": {
+      "type": "component",
+      "component": "klassengruppe.klassengruppe",
+      "repeatable": true
+    }
+  }
+}

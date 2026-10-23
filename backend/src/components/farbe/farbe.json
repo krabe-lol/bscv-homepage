@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_farbe_farbes",
+  "info": {
+    "displayName": "Farbe",
+    "icon": "paintBrush"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "hex": {
+      "type": "string",
+      "required": true,
+      "regex": "^#[0-9a-fA-F]{6}$"
+    }
+  },
+  "config": {}
+}

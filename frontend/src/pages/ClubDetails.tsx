@@ -1,40 +1,228 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { Contact, Flag, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
+import ImageSlot from "../components/ui/ImageSlot";
+import Link from "../components/ui/Link";
+import PageHeader from "../components/ui/PageHeader";
+import Section, { GUTTER } from "../components/ui/Section";
+import { API_URL, mediaUrl } from "../lib/api";
+import { formatDate } from "../lib/format";
+import { RACES_PATH, getNextRace, raceTitle } from "../lib/races";
+import { useApi } from "../lib/useApi";
+import type { Anschrift, Race, Verein } from "../lib/types";
+
+const POPULATE = [
+  "populate[logo]=true",
+  "populate[image]=true",
+  "populate[vehicleGraphic]=true",
+  "populate[colors]=true",
+  "populate[president][populate][0]=address",
+  "populate[mailing][populate][0]=address",
+].join("&");
+
+const Card = ({ title, icon: Icon, className = "", children }: { title: string; icon: LucideIcon; className?: string; children: ReactNode }) => (
+  <section className={`bg-panel px-5 py-5 sm:px-7 sm:py-7 ${className}`}>
+    <h2 className="mb-5 flex items-center gap-3 text-lg font-bold uppercase tracking-wide">
+      <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden />
+      {title}
+    </h2>
+    {children}
+  </section>
+);
+
+const Stat = ({ icon: Icon, value, label }: { icon: LucideIcon; value: ReactNode; label: string }) => (
+  <div className="flex items-center gap-3 bg-ink px-5 py-3">
+    <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden />
+    <div>
+      <div className="text-lg font-semibold leading-tight">{value}</div>
+      <div className="text-sm text-muted">{label}</div>
+    </div>
+  </div>
+);
+
+const ContactCard = ({ title, icon, contact }: { title: string; icon: LucideIcon; contact?: Anschrift | null }) => {
+  if (!contact) return null;
+  const { name, address, phone, mobile, email } = contact;
+  return (
+    <Card title={title} icon={icon}>
+      <div className="flex flex-col gap-3 text-sm text-body">
+        {name && <div className="font-semibold">{name}</div>}
+        {(address?.street || address?.city) && (
+          <div>
+            {address?.street}
+            <br />
+            {address?.city}
+          </div>
+        )}
+        {(phone || mobile) && (
+          <div>
+            {[phone, mobile].filter(Boolean).map((n) => (
+              <Fragment key={n}>
+                {n}
+                <br />
+              </Fragment>
+            ))}
+          </div>
+        )}
+        {email && (
+          <Link href={`mailto:${email}`} tone="muted" size="inherit">
+            {email}
+          </Link>
+        )}
+      </div>
+    </Card>
+  );
+};
 
 const ClubDetails = () => {
-  const { id } = useParams<{ id: string }>();
-  const [club, setClub] = useState<any>(null);
+  const { documentId } = useParams<{ documentId: string }>();
+  const races = useApi<Race[]>(RACES_PATH).data ?? [];
+  const [result, setResult] = useState<{ id: string; club: Verein | null } | null>(null);
 
   useEffect(() => {
-    if (!id) return;
-
+    if (!documentId) return;
     axios
-      .get(`http://localhost:1337/api/vereins/${id}?populate=*`)
-      .then(res => setClub(res.data.data));
-  }, [id]);
+      .get(`${API_URL}/api/vereins/${documentId}?${POPULATE}`)
+      .then((res) => setResult({ id: documentId, club: res.data.data }))
+      .catch(() => setResult({ id: documentId, club: null }));
+  }, [documentId]);
 
-  if (!club) return <div>Lädt...</div>;
+  const loaded = result !== null && result.id === documentId;
+  const club = loaded ? result.club : null;
+
+  if (loaded && !club) {
+    return (
+      <Section spacing="page">
+        <PageHeader title="Verein nicht gefunden" />
+        <Link iconRight={ChevronsRight} to="/vereine">zurück zu den Vereinen</Link>
+      </Section>
+    );
+  }
+
+  if (!club) {
+    return (
+      <Section spacing="page" className="min-h-96 text-muted">
+        Lädt …
+      </Section>
+    );
+  }
+
+  const homeRace = getNextRace(races.filter((r) => r.organiser?.documentId === club.documentId));
+  const hasSidebar = homeRace || club.president || club.mailing;
 
   return (
     <>
-      {club.image?.url && (
-        <img
-          src={`http://localhost:1337${club.image.url}`}
-          alt={`Foto von ${club.name}`}
-          width={100}
-        />
-      )}
+      <div className={`relative flex min-h-[50svh] items-end overflow-hidden bg-cover bg-center ${club.image?.url ? "" : "bg-panel border-b border-line"}`}>
+        {club.image?.url && (
+          <div className="absolute inset-0 opacity-20">
+            <img src={mediaUrl(club.image.url)} alt={`Bild von ${club.name}`} className="w-full h-full object-cover object-[25%_75%]" />
+          </div>
+        )}
+        <div className={`relative flex w-full flex-col items-start gap-4 pt-24 pb-8 sm:flex-row sm:items-end sm:gap-8 ${GUTTER}`}>
+          <div className={`flex h-24 w-24 shrink-0 sm:h-36 sm:w-36 items-center justify-center ${club.logo?.url ? "bg-paper p-3" : "border border-line-strong"}`}>
+            <ImageSlot src={mediaUrl(club.logo?.url)} alt={`Logo von ${club.name}`} placeholder="Logo" fit="contain" />
+          </div>
+          <div className="min-w-0">
+            <h1 className="mb-4 break-words hyphens-auto font-display text-3xl font-bold uppercase leading-none tracking-tight sm:text-4xl md:text-7xl">
+              {club.name}
+            </h1>
+            {club.website && (
+              <div className="flex items-center gap-2.5 break-all text-lg">
+                <Globe className="h-5 w-5 text-accent" aria-hidden />
+                <Link href={club.website} size="inherit" external className="no-underline">
+                  {club.website.replace(/^https?:\/\//, "")}
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
 
-      <h1>{club.name}</h1>
+      <Section spacing="page">
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(260px,300px)] items-start gap-8 max-lg:grid-cols-1">
+          <div className="flex flex-col gap-8">
 
-      {club.logo?.url && (
-        <img
-          src={`http://localhost:1337${club.logo.url}`}
-          alt={`Logo von ${club.name}`}
-          width={100}
-        />
-      )}
+            {/* Über den Verein */}
+            {(club.about || club.founded) && (
+              <Card title="Über den Verein" icon={Info}>
+                {club.about && <p className="mb-6 max-w-2xl whitespace-pre-line text-base leading-relaxed text-body">{club.about}</p>}
+                {club.founded && (
+                  <div className="flex flex-wrap gap-3">
+                    <Stat icon={Flag} value={new Date(club.founded).getFullYear()} label="Gründungsjahr" />
+                  </div>
+                )}
+              </Card>
+            )}
+
+            {/* Vereinsfarben & Fahrzeuggrafik */}
+            {(club.vehicleGraphic?.url || (club.colors && club.colors.length > 0)) && (
+              <Card title="Vereinsfarben" icon={Palette}>
+                <div className="flex flex-wrap gap-x-20 gap-y-8">
+                  {club.colors && club.colors.length > 0 && (
+                    <ul className="flex flex-col">
+                      {club.colors.map((c) => (
+                        <li key={c.id} className="flex items-center h-20 w-20" style={{ backgroundColor: c.hex }} >
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {club.vehicleGraphic?.url && (
+                    <div>
+                      <img
+                        src={mediaUrl(club.vehicleGraphic.url)}
+                        alt={`Vereinsfahrzeug von ${club.name}`}
+                        className="max-h-30 max-w-full object-contain object-left"
+                        style={{ filter: "drop-shadow(0 0 1px rgb(255 255 255 / 0.35))" }}
+                      />
+                      <div className="font-mono text-xs uppercase tracking-wider mt-4 text-muted">
+                        <span className="w-9/20 inline-block">Front</span>
+                        <span className="w-11/20 inline-block">Seite</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </Card>
+            )}
+          </div>
+
+          {hasSidebar && (
+            <div className="flex flex-col gap-8">
+              {/* Veranstaltungen */}
+              {homeRace && (
+                <section className="bg-brand px-5 py-5 sm:px-7 sm:py-7">
+                  <div className="mb-3 text-sm text-on-brand">Nächste Veranstaltung des Vereins</div>
+                  <div className="mb-3 font-mono text-3xl font-semibold">{formatDate(homeRace.date)}</div>
+                  <div className={`text-lg ${homeRace.track?.name ? "mb-2" : "mb-6"}`}>{raceTitle(homeRace)}</div>
+                  {homeRace.track?.name && (
+                    <div className="mb-6 flex items-center gap-1.5 text-sm text-on-brand">
+                      <MapPin className="h-4 w-4 shrink-0" aria-hidden />
+                      {homeRace.track?.name}
+                    </div>
+                  )}
+                  <div className="text-right">
+                    <Link iconRight={ChevronsRight} to="/renntermine">alle Renntermine</Link>
+                  </div>
+                </section>
+              )}
+              {/* Kontakt */}
+              {club.president && (
+                <ContactCard title="1. Vorstand" icon={Contact} contact={club.president} />
+              )}
+              {club.mailing && (
+                <ContactCard title="Versandanschrift" icon={Package} contact={club.mailing} />
+              )}
+
+              {/* Standort */}
+              {/* {club.location && (
+                <Card title="Standort" icon={MapPin}>
+                  <div className="font-semibold">{club.location}</div>
+                </Card>
+              )} */}
+            </div>
+          )}
+        </div>
+      </Section>
     </>
   );
 };

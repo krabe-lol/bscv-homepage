@@ -1,0 +1,52 @@
+{
+  "kind": "singleType",
+  "collectionName": "seitentexte",
+  "info": {
+    "singularName": "seitentext",
+    "pluralName": "seitentexte",
+    "displayName": "Seitentexte",
+    "description": "Einleitungen der Seiten und Texte der Kacheln. In der Vereine-Einleitung wird {anzahl} durch die Zahl der Vereine ersetzt."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "racesIntro": {
+      "type": "text"
+    },
+    "clubsIntro": {
+      "type": "text"
+    },
+    "albumsIntro": {
+      "type": "text"
+    },
+    "standingsIntro": {
+      "type": "text"
+    },
+    "contactIntro": {
+      "type": "text"
+    },
+    "notFoundIntro": {
+      "type": "text"
+    },
+    "licenseTileTitle": {
+      "type": "string"
+    },
+    "licenseTileText": {
+      "type": "text"
+    },
+    "licenseTileLink": {
+      "type": "string"
+    },
+    "officeTileTitle": {
+      "type": "string"
+    },
+    "officeTileText": {
+      "type": "text"
+    },
+    "copyright": {
+      "type": "string"
+    }
+  }
+}

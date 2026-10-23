@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "funktionaere",
+  "info": { "singularName": "funktionaer", "pluralName": "funktionaere", "displayName": "Funktionär" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "name": { "type": "string" },
+    "club": { "type": "string" },
+    "photo": { "type": "media", "multiple": false, "allowedTypes": ["images"] }
+  }
+}

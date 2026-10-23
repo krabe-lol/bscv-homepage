@@ -1,0 +1,13 @@
+{
+  "kind": "singleType",
+  "collectionName": "einstellungen",
+  "info": { "singularName": "einstellung", "pluralName": "einstellungen", "displayName": "Einstellung" },
+  "options": { "draftAndPublish": false },
+  "pluginOptions": {},
+  "attributes": {
+    "founded": { "type": "integer" },
+    "classCount": { "type": "integer" },
+    "mylapsUrl": { "type": "string" },
+    "officeEmail": { "type": "email" }
+  }
+}

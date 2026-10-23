@@ -53,6 +53,24 @@
         "videos",
         "audios"
       ]
+    },
+    "sortName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "vehicleGraphic": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "colors": {
+      "type": "component",
+      "component": "farbe.farbe",
+      "repeatable": true
     }
   }
 }
