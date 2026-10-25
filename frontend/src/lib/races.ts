@@ -4,8 +4,7 @@ const ALL = "pagination[pageSize]=200&sort=date:desc&populate[organiser][fields]
 export const RACES_PATH = `veranstaltungen?${ALL}`;
 
 export const raceTitle = (race: Race) => race.title.replace(" - ", " – ");
-export const isFinal = (race: Race) => /endlauf/i.test(race.title);
-export const raceYear = (race: Race) => Number(race.date.slice(0, 4));
+const raceYear =(race: Race) => Number(race.date.slice(0, 4));
 
 /** Rennen nach Jahr gruppiert, neueste Saison zuerst. */
 export const groupBySeason = (races: Race[]) => {

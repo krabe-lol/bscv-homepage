@@ -16,18 +16,16 @@ const MENU_ID = "mobile-menu";
 
 const MainNav = () => {
   const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
-
-  // Menü schließen bei Routenwechsel
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  // Menü merkt sich die Route, auf der es geöffnet wurde, und ist nach einem Routenwechsel damit zu
+  const [openOn, setOpenOn] = useState<string | null>(null);
+  const open = openOn === pathname;
+  const setOpen = (value: boolean) => setOpenOn(value ? pathname : null);
 
   // Menü schließen mit Escape
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") setOpenOn(null);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -58,7 +56,7 @@ const MainNav = () => {
 
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
+        onClick={() => setOpen(!open)}
         aria-label={open ? "Menü schließen" : "Menü öffnen"}
         aria-expanded={open}
         aria-controls={MENU_ID}

@@ -1,16 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Hero from "../components/home/Hero";
-import RacesPreview from "../components/home/RacesPreview";
 import AboutBscv from "../components/home/AboutBscv";
-import StandingsTeaser from "../components/home/StandingsTeaser";
-import ClubsTeaser from "../components/home/ClubsTeaser";
-import Fascination from "../components/home/Fascination";
 import Gallery from "../components/home/Gallery";
 import Presidium from "../components/home/Presidium";
 import Funktionaere from "../components/home/Funktionaere";
 import Dokumente from "../components/home/Dokumente";
-import InfoTiles from "../components/home/InfoTiles";
 import { API_URL } from "../lib/api";
 import type { HomeContent, Verein } from "../lib/types";
 

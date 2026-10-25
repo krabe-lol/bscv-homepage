@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Contact, Flag, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { Contact, Flag, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsRight } from "lucide-react";
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlot from "../components/ui/ImageSlot";
@@ -115,7 +115,7 @@ const ClubDetails = () => {
     <>
       <div className={`relative flex min-h-[50svh] items-end overflow-hidden bg-cover bg-center ${club.image?.url ? "" : "bg-panel border-b border-line"}`}>
         {club.image?.url && (
-          <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 opacity-40">
             <img src={mediaUrl(club.image.url)} alt={`Bild von ${club.name}`} className="w-full h-full object-cover object-[25%_75%]" />
           </div>
         )}

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChevronsRight, Flag, Info, MapPin, Ruler, type LucideIcon } from "lucide-react";
+import { ChevronsRight, Flag, Info, MapPin, type LucideIcon } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import GalleryLinks from "../components/ui/GalleryLinks";
