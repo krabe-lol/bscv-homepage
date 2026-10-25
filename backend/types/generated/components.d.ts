@@ -53,7 +53,7 @@ export interface KlassengruppeKlassengruppe extends Struct.ComponentSchema {
 }
 
 declare module '@strapi/strapi' {
-  export module Public {
+  export namespace Public {
     export interface ComponentSchemas {
       'adresse.adresse': AdresseAdresse;
       'anschrift.anschrift': AnschriftAnschrift;

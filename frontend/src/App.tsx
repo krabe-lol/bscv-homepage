@@ -13,10 +13,36 @@ import ContentPage from "./pages/ContentPage";
 import Contact from "./pages/Contact";
 import Albums from "./pages/Albums";
 import NotFound from "./pages/NotFound";
+import Maintenance from "./pages/Maintenance";
+import { usePreview } from "./lib/preview";
+import { useApi } from "./lib/useApi";
+import type { Einstellung } from "./lib/types";
 
 function App() {
+  const settings = useApi<Einstellung>("einstellung");
+  const { preview, end } = usePreview();
+  const maintenance = settings.data?.maintenanceMode === true;
+
+  if (settings.data && maintenance && !preview) {
+    return (
+      <>
+        <ScrollManager />
+        <Maintenance settings={settings.data} />
+      </>
+    );
+  }
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-ink text-paper">
+    // Unsichtbar, bis klar ist, ob der Wartungsmodus an ist; die Seiten laden ihre Daten trotzdem schon parallel
+    <div className={`min-h-screen overflow-x-hidden bg-ink text-paper ${settings.loaded ? "" : "invisible"}`}>
+      {maintenance && (
+        <div className="bg-brand px-4 py-2.5 text-center text-sm text-on-brand">
+          Wartungsmodus ist an, Besucher sehen nur die Wartungsseite.{" "}
+          <button type="button" onClick={end} className="cursor-pointer underline underline-offset-4">
+            Vorschau beenden
+          </button>
+        </div>
+      )}
       <ScrollManager />
       <MainNav />
       <Routes>

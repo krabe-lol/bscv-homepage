@@ -140,4 +140,6 @@ export interface Einstellung {
   classCount?: number | null;
   mylapsUrl?: string | null;
   officeEmail?: string | null;
+  maintenanceMode?: boolean | null;
+  maintenanceText?: string | null;
 }
