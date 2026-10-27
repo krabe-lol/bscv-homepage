@@ -165,3 +165,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Uploads entstehen seit dem Go-live auf dem Server (cms.bscv.de) und werden dort gesichert, nicht im Git
+backend/public/uploads/*
+!backend/public/uploads/.gitkeep
