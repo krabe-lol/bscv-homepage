@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: Archivo, Helvetica, Arial, sans-serif;
-  --font-display: "Space Grotesk", Helvetica, Arial, sans-serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Archivo Variable", Helvetica, Arial, sans-serif;
+  --font-display: "Space Grotesk Variable", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
 
   --color-ink: #0B0F17;
   --color-panel: #111722;
