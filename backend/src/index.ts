@@ -13,6 +13,8 @@ export default {
     // im Upload mit EBUSY und die Medienbibliothek meldet 500, obwohl das Bild gespeichert ist.
     // Version von sharp in package.json muss zu der von @strapi/upload passen (gleiche Instanz).
     sharp.cache(false);
+    // Bilder nacheinander statt auf allen Kernen gleichzeitig verkleinern: hält die Speicherspitze beim Upload klein
+    sharp.concurrency(1);
   },
 
   /**

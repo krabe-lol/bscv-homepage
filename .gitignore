@@ -1,5 +1,9 @@
 creds.md
 
+# Deployment (scripts/output.mjs): fertiger Build und Produktions-Secrets
+/output
+backend/.env.server
+
 ############################
 # OS X
 ############################
