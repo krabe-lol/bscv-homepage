@@ -4,7 +4,10 @@
     "dev": "concurrently -k -n back,front -c yellow,cyan \"npm run develop --prefix backend\" \"npm run dev --prefix frontend\"",
     "dev:backend": "npm run develop --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
-    "output": "node scripts/output.mjs"
+    "output": "node scripts/output.mjs",
+    "deploy:web": "node scripts/deploy.mjs web",
+    "deploy:cms": "node scripts/deploy.mjs cms",
+    "backup": "node scripts/backup.mjs"
   },
   "devDependencies": {
     "concurrently": "^10.0.6"

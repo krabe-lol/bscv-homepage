@@ -1,0 +1,44 @@
+# Deployt das Frontend (bscv.de) per SFTP nach Hetzner, sobald auf main etwas in frontend/ geändert wird.
+# Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY = Inhalt der privaten
+# Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase), inkl. BEGIN/END-Zeilen.
+# Der Runner braucht Docker, weil der Job in einem Container (node:22-bullseye) läuft.
+name: Frontend deployen
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "frontend/**"
+  workflow_dispatch:
+
+# Zwei Deploys desselben Teils dürfen sich nicht überlappen
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Gleiches Node und glibc wie beim Build für den Hoster
+    container: node:22-bullseye
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: lftp installieren
+        run: apt-get update && apt-get install -y lftp openssh-client
+
+      # Die package-lock.json-Dateien stammen von npm 11; das npm 10 aus dem Image hält sie für veraltet und bricht ab
+      - name: npm wie lokal
+        run: npm install -g npm@11.11.1
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+        working-directory: frontend
+
+      - name: Frontend bauen
+        run: node scripts/output.mjs --nur-web
+
+      - name: Per SFTP hochladen
+        run: node scripts/deploy.mjs web
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
