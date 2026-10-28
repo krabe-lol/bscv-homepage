@@ -7,8 +7,8 @@
   "attributes": {
     "title": { "type": "string" },
     "date": { "type": "date" },
-    "url": { "type": "string" },
+    "galleryUrl": { "type": "string" },
     "preview": { "type": "media", "multiple": false, "allowedTypes": ["images"] },
-    "veranstaltung": { "type": "relation", "relation": "manyToOne", "target": "api::veranstaltung.veranstaltung", "inversedBy": "albums" }
+    "event": { "type": "relation", "relation": "manyToOne", "target": "api::event.event", "inversedBy": "albums" }
   }
 }

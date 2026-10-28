@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 import { mediaSrcSet, mediaUrl } from "../../lib/api";
-import type { Verein } from "../../lib/types";
+import type { Club } from "../../lib/types";
 import ImageSlot from "../ui/ImageSlot";
 
 /** Kachel: oben Fahrzeugfoto, unten Vereinsname, das Logo sitzt gerahmt auf der Trennlinie. */
-const ClubCard = ({ club }: { club: Verein }) => (
+const ClubCard = ({ club }: { club: Club }) => (
   <Link
     to={`/vereine/${club.documentId}`}
     className="group relative flex aspect-10/8 flex-col overflow-hidden bg-panel"
   >
     <div className="h-1/2 w-full overflow-hidden">
-      {club.image?.url ? (
+      {club.vehiclePhoto?.url ? (
         <ImageSlot
-          src={mediaUrl(club.image.url)}
-          srcSet={mediaSrcSet(club.image)}
+          src={mediaUrl(club.vehiclePhoto.url)}
+          srcSet={mediaSrcSet(club.vehiclePhoto)}
           sizes="(max-width: 640px) 100vw, 400px"
           alt={`Fahrzeug von ${club.name}`}
           placeholder="Fahrzeugfoto"

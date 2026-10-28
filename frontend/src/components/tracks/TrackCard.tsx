@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { mediaSrcSet, mediaUrl } from "../../lib/api";
 import { formatLength } from "../../lib/format";
-import type { Rennstrecke } from "../../lib/types";
+import type { Track } from "../../lib/types";
 import ImageSlot from "../ui/ImageSlot";
 
 /** Kachel: oben Streckenfoto, unten Name sowie Ort und Länge. */
-const TrackCard = ({ track }: { track: Rennstrecke }) => {
+const TrackCard = ({ track }: { track: Track }) => {
   const meta = [track.address?.city, track.lengthMeters ? formatLength(track.lengthMeters) : null].filter(Boolean);
 
   return (

@@ -1,0 +1,239 @@
+{
+  "documentId": "jod30c2k38zajdff9xy5nwfl",
+  "name": "Public",
+  "description": "Default role given to unauthenticated user.",
+  "type": "public",
+  "locale": null,
+  "permissions": [
+    {
+      "documentId": "x2f3tookh2m9cjejsdyw1oap",
+      "action": "api::about.about.find",
+      "locale": null
+    },
+    {
+      "documentId": "z6t1upw0uvd990jog8eifunw",
+      "action": "api::album.album.find",
+      "locale": null
+    },
+    {
+      "documentId": "jleyunh0gr3djl7lqog4qbj2",
+      "action": "api::album.album.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "fcpum5hdetgtcxlypl6hk1cu",
+      "action": "api::board-member.board-member.find",
+      "locale": null
+    },
+    {
+      "documentId": "utb2mc0891p4c84bzvtc6mjz",
+      "action": "api::board-member.board-member.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "ak99f4moeoqvvxrklqkuo7yg",
+      "action": "api::club.club.find",
+      "locale": null
+    },
+    {
+      "documentId": "nh7pp0k2gtt3m1f89jzf1th5",
+      "action": "api::club.club.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "vonjglvpldd061m5wxauzx3m",
+      "action": "api::clubs-page.clubs-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "hd5ahzw34bbv1krmtn2yjexk",
+      "action": "api::contact-page.contact-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "iczgea5vg4byasqfp5gzna2n",
+      "action": "api::download.download.find",
+      "locale": null
+    },
+    {
+      "documentId": "tq4ngcjb6s3f0l5fclagg9dx",
+      "action": "api::download.download.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "s0c3dx2jp5kjvumjy02zxnew",
+      "action": "api::event.event.find",
+      "locale": null
+    },
+    {
+      "documentId": "q5uy2303rp06tadb79uwdha1",
+      "action": "api::event.event.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "9763rtkfizjaclnzd32a6jqb",
+      "action": "api::events-page.events-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "oidrnmb04jbz5p7jr1ik7cmj",
+      "action": "api::footer.footer.find",
+      "locale": null
+    },
+    {
+      "documentId": "o95j5hkp545xfzvzyq5o21t1",
+      "action": "api::functionary.functionary.find",
+      "locale": null
+    },
+    {
+      "documentId": "c9h1xx225tpgzrfm4ijqbe5w",
+      "action": "api::functionary.functionary.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "fiulp4c05wq9l1g234avdaiz",
+      "action": "api::gallery-page.gallery-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "f2kejha0ttatm0rmpskmti6l",
+      "action": "api::home.home.find",
+      "locale": null
+    },
+    {
+      "documentId": "lub3aat16mhddwsqn2c5uhdi",
+      "action": "api::maintenance.maintenance.find",
+      "locale": null
+    },
+    {
+      "documentId": "walx5tn1k1ok6a8x4zfw1k4r",
+      "action": "api::not-found-page.not-found-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "qloptu33slq0tbo6szvl2td0",
+      "action": "api::official-role.official-role.find",
+      "locale": null
+    },
+    {
+      "documentId": "nchjkg7h3traejzprzkk2c3q",
+      "action": "api::official-role.official-role.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "rwplrdsdub8pwtwmw6letkl0",
+      "action": "api::page.page.find",
+      "locale": null
+    },
+    {
+      "documentId": "bikkplyrurre8x8jy8hg0j2m",
+      "action": "api::page.page.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "n0xkd99ibg273y5ztedh34ix",
+      "action": "api::post.post.find",
+      "locale": null
+    },
+    {
+      "documentId": "kagcjjetjczw53dvfuu9r0q2",
+      "action": "api::post.post.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "ojmciob1xyaqg8ohvdj9m7h4",
+      "action": "api::section-documents.section-documents.find",
+      "locale": null
+    },
+    {
+      "documentId": "jye99bz6vrxsbjszwfm9vthy",
+      "action": "api::seitentext.seitentext.find",
+      "locale": null
+    },
+    {
+      "documentId": "qsm7adlv9bila8nmvtrvyhfr",
+      "action": "api::standing.standing.find",
+      "locale": null
+    },
+    {
+      "documentId": "iwgik3xnniox73x2b499i1al",
+      "action": "api::standing.standing.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "fj50cq11ukidpsba07kp5pr2",
+      "action": "api::standings-page.standings-page.find",
+      "locale": null
+    },
+    {
+      "documentId": "undjv5y02g5xg6pdmz5er65d",
+      "action": "api::track.track.find",
+      "locale": null
+    },
+    {
+      "documentId": "cnta9ivvf39p3hmpq0v4pbsz",
+      "action": "api::track.track.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "ymd60rpmvz1nu4kmof9hg4un",
+      "action": "api::videographer.videographer.find",
+      "locale": null
+    },
+    {
+      "documentId": "ue3rx6hutyom7qf6rfxl4yql",
+      "action": "api::videographer.videographer.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "zta006reqsq2q2nsj9m8l87b",
+      "action": "plugin::upload.content-api.find",
+      "locale": null
+    },
+    {
+      "documentId": "jzqek3woslz5eut9pwm91vlq",
+      "action": "plugin::upload.content-api.findOne",
+      "locale": null
+    },
+    {
+      "documentId": "fsdo6beo0s9ncm77zs9i9t6g",
+      "action": "plugin::users-permissions.auth.callback",
+      "locale": null
+    },
+    {
+      "documentId": "ywhb8hrn1vv9ectvuqfejxru",
+      "action": "plugin::users-permissions.auth.connect",
+      "locale": null
+    },
+    {
+      "documentId": "p9v9of24k1ot64hta2x53dwm",
+      "action": "plugin::users-permissions.auth.emailConfirmation",
+      "locale": null
+    },
+    {
+      "documentId": "xxg577x06bwiujh5zq04e4gb",
+      "action": "plugin::users-permissions.auth.forgotPassword",
+      "locale": null
+    },
+    {
+      "documentId": "ls8az9stylbbfu5fme6siy56",
+      "action": "plugin::users-permissions.auth.refresh",
+      "locale": null
+    },
+    {
+      "documentId": "ox1mx6py8gkuq6eyze6mw495",
+      "action": "plugin::users-permissions.auth.register",
+      "locale": null
+    },
+    {
+      "documentId": "cvkbvwdpogjko0u2aiv260ji",
+      "action": "plugin::users-permissions.auth.resetPassword",
+      "locale": null
+    },
+    {
+      "documentId": "d77tdkhgbup1fh5ait6m4m5m",
+      "action": "plugin::users-permissions.auth.sendEmailConfirmation",
+      "locale": null
+    }
+  ]
+}

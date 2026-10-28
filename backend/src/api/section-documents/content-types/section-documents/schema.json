@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "sections_documents",
+  "info": {
+    "singularName": "section-documents",
+    "pluralName": "sections-documents",
+    "displayName": "Dokumente (Sektion)",
+    "description": "Lizenz-Kachel im Bereich Dokumente auf der Startseite. Linkziel und Linktext sind einstellbar, ohne Linkziel führt der Link zur Seite Kontakt."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "licenseTileTitle": {
+      "type": "string"
+    },
+    "licenseTileText": {
+      "type": "text"
+    },
+    "licenseTileLinkText": {
+      "type": "string"
+    },
+    "licenseTileLinkUrl": {
+      "type": "string"
+    }
+  }
+}

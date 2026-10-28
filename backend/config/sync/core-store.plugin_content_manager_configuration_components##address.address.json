@@ -1,0 +1,85 @@
+{
+  "key": "plugin_content_manager_configuration_components::address.address",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "relationOpenMode": "modal",
+      "mainField": "street",
+      "defaultSortBy": "street",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "street": {
+        "edit": {
+          "label": "Straße, Hausnr.",
+          "description": "",
+          "placeholder": "Musterstr. 12",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "street",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "city": {
+        "edit": {
+          "label": "PLZ, Ort",
+          "description": "",
+          "placeholder": "12345 Musterstadt",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "city",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "edit": [
+        [
+          {
+            "name": "street",
+            "size": 6
+          },
+          {
+            "name": "city",
+            "size": 6
+          }
+        ]
+      ],
+      "list": [
+        "id",
+        "street",
+        "city"
+      ]
+    },
+    "uid": "address.address",
+    "isComponent": true
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

@@ -1,0 +1,76 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clubs",
+  "info": {
+    "singularName": "club",
+    "pluralName": "clubs",
+    "displayName": "Verein"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "about": {
+      "type": "richtext"
+    },
+    "website": {
+      "type": "string",
+      "regex": "^(https?:\\/\\/)?([\\w.-]+)\\.([a-z]{2,})(:\\d+)?(\\/[^\\s]*)?$"
+    },
+    "foundedYear": {
+      "type": "integer"
+    },
+    "president": {
+      "type": "component",
+      "component": "contact.contact",
+      "repeatable": false
+    },
+    "mailingAddress": {
+      "type": "component",
+      "component": "contact.contact",
+      "repeatable": false
+    },
+    "vehiclePhoto": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "sortName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "vehicleGraphic": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "colors": {
+      "type": "component",
+      "component": "color.color",
+      "repeatable": true
+    }
+  }
+}

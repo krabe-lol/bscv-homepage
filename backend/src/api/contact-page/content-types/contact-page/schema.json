@@ -1,0 +1,28 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_pages",
+  "info": {
+    "singularName": "contact-page",
+    "pluralName": "contact-pages",
+    "displayName": "Kontakt",
+    "description": "Texte der Seite Kontakt und E-Mail-Adresse der Geschäftsstelle."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "intro": {
+      "type": "text"
+    },
+    "officeTileTitle": {
+      "type": "string"
+    },
+    "officeTileText": {
+      "type": "text"
+    },
+    "officeEmail": {
+      "type": "email"
+    }
+  }
+}

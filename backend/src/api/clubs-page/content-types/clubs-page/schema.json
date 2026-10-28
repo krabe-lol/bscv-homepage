@@ -1,0 +1,19 @@
+{
+  "kind": "singleType",
+  "collectionName": "clubs_pages",
+  "info": {
+    "singularName": "clubs-page",
+    "pluralName": "clubs-pages",
+    "displayName": "Vereine (Übersicht)",
+    "description": "Einleitung der Seite Vereine. {anzahl} wird durch die Zahl der Vereine ersetzt."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "intro": {
+      "type": "text"
+    }
+  }
+}

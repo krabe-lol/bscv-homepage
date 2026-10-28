@@ -2,16 +2,16 @@ import { ChevronsRight } from "lucide-react";
 import MediaPanel from "../ui/MediaPanel";
 import Section from "../ui/Section";
 import { formatDateLong } from "../../lib/format";
-import { RACES_PATH, getNextRace } from "../../lib/races";
+import { EVENTS_PATH, getNextEvent } from "../../lib/events";
 import { useApi } from "../../lib/useApi";
 import { mediaUrl } from "../../lib/api";
-import type { HomeContent, Race } from "../../lib/types";
+import type { Home, Event } from "../../lib/types";
 import Link from "../ui/Link";
 
-const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number }) => {
-  const races = useApi<Race[]>(RACES_PATH).data ?? [];
-  const nextRace = getNextRace(races);
-  const lastYear = races[0] ? new Date(races[0].date).getFullYear() : null;
+const Hero = ({ home, clubCount }: { home: Home | null; clubCount: number }) => {
+  const events = useApi<Event[]>(EVENTS_PATH).data ?? [];
+  const nextEvent = getNextEvent(events);
+  const lastYear = events[0] ? new Date(events[0].date).getFullYear() : null;
   const [titleFirst, ...titleWords] = (home?.title ?? "").split(" ");
   const titleRest = titleWords.join(" ");
 
@@ -45,18 +45,18 @@ const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number
         </div>
 
         <MediaPanel
-          src={mediaUrl(nextRace?.track?.photo?.url ?? home?.image?.[1]?.url)}
-          alt={nextRace?.track?.photo?.url ? `Rennstrecke ${nextRace.track.name}` : "Luftbild Rennstrecke"}
+          src={mediaUrl(nextEvent?.track?.photo?.url ?? home?.image?.[1]?.url)}
+          alt={nextEvent?.track?.photo?.url ? `Rennstrecke ${nextEvent.track.name}` : "Luftbild Rennstrecke"}
           placeholder="Luftbild Rennstrecke"
           overlay="navy"
           className="flex flex-col justify-end gap-2.5 px-5 py-7 lg:aspect-square lg:justify-self-stretch lg:self-stretch lg:px-8 lg:py-9"
         >
           <div className="pointer-events-none relative">
             <div className="mb-3.5 text-sm text-hero-label">Nächste Veranstaltung</div>
-            {nextRace ? (
+            {nextEvent ? (
               <>
-                <div className="text-3xl font-semibold leading-none lg:text-4xl">{formatDateLong(nextRace.date)}</div>
-                {nextRace.track?.name && <div className="mt-5 text-2xl">in {nextRace.track.name}</div>}
+                <div className="text-3xl font-semibold leading-none lg:text-4xl">{formatDateLong(nextEvent.date)}</div>
+                {nextEvent.track?.name && <div className="mt-5 text-2xl">in {nextEvent.track.name}</div>}
               </>
             ) : (
               <div className="text-3xl font-semibold leading-none">
@@ -65,7 +65,7 @@ const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number
             )}
           </div>
           <Link iconRight={ChevronsRight} to="/renntermine" className="relative">
-            {nextRace ? "mehr Infos" : "alle Renntermine"}
+            {nextEvent ? "mehr Infos" : "alle Renntermine"}
           </Link>
         </MediaPanel>
       </div>

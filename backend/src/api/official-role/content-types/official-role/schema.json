@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "official_roles",
+  "info": {
+    "singularName": "official-role",
+    "pluralName": "official-roles",
+    "displayName": "Funktion",
+    "description": "Aufgaben der Funktionäre (z. B. Spoko, Transponder, Rundenzählung). Auf der Startseite in der Reihenfolge von „position“."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "integer"
+    },
+    "functionaries": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::functionary.functionary",
+      "mappedBy": "officialRole"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "kind": "collectionType",
+  "collectionName": "pages",
+  "info": { "singularName": "page", "pluralName": "pages", "displayName": "Seite" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "title": { "type": "string" },
+    "slug": { "type": "uid", "targetField": "title" },
+    "content": { "type": "richtext" }
+  }
+}

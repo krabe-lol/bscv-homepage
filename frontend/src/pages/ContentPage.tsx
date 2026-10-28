@@ -2,11 +2,11 @@ import Markdown from "../components/ui/Markdown";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
 import { useApi } from "../lib/useApi";
-import type { Seite } from "../lib/types";
+import type { Page } from "../lib/types";
 
 /** Textseite aus Strapi (Content-Type "Seite"), über den Slug ausgewählt. */
 const ContentPage = ({ slug }: { slug: string }) => {
-  const { data } = useApi<Seite[]>(`seiten?filters[slug][$eq]=${slug}`);
+  const { data } = useApi<Page[]>(`pages?filters[slug][$eq]=${slug}`);
   const page = data?.[0];
 
   return (

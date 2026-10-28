@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "standings",
+  "info": {
+    "singularName": "standing",
+    "pluralName": "standings",
+    "displayName": "Punktewertung"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "position": {
+      "type": "integer"
+    },
+    "pdf": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "files"
+      ]
+    }
+  }
+}

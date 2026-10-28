@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "standings_pages",
+  "info": {
+    "singularName": "standings-page",
+    "pluralName": "standings-pages",
+    "displayName": "Punktewertung (Übersicht)",
+    "description": "Einleitung der Seite Punktewertung."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "intro": {
+      "type": "text"
+    },
+    "mylapsUrl": {
+      "type": "string"
+    }
+  }
+}

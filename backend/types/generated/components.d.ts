@@ -1,7 +1,7 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface AdresseAdresse extends Struct.ComponentSchema {
-  collectionName: 'components_adresse_adresses';
+export interface AddressAddress extends Struct.ComponentSchema {
+  collectionName: 'components_address_addresses';
   info: {
     displayName: 'Adresse';
     icon: 'pinMap';
@@ -12,35 +12,8 @@ export interface AdresseAdresse extends Struct.ComponentSchema {
   };
 }
 
-export interface AnschriftAnschrift extends Struct.ComponentSchema {
-  collectionName: 'components_anschrift_anschrifts';
-  info: {
-    displayName: 'Anschrift';
-    icon: 'pinMap';
-  };
-  attributes: {
-    address: Schema.Attribute.Component<'adresse.adresse', false>;
-    email: Schema.Attribute.Email;
-    mobile: Schema.Attribute.String;
-    name: Schema.Attribute.String;
-    phone: Schema.Attribute.String;
-  };
-}
-
-export interface FarbeFarbe extends Struct.ComponentSchema {
-  collectionName: 'components_farbe_farbes';
-  info: {
-    displayName: 'Farbe';
-    icon: 'paintBrush';
-  };
-  attributes: {
-    hex: Schema.Attribute.String & Schema.Attribute.Required;
-    name: Schema.Attribute.String;
-  };
-}
-
-export interface KlassengruppeKlassengruppe extends Struct.ComponentSchema {
-  collectionName: 'components_klassengruppe_klassengruppes';
+export interface ClassGroupClassGroup extends Struct.ComponentSchema {
+  collectionName: 'components_class_group_class_groups';
   info: {
     description: 'Eine Klasse pro Zeile, "---" als Trenner';
     displayName: 'Klassengruppe';
@@ -52,13 +25,40 @@ export interface KlassengruppeKlassengruppe extends Struct.ComponentSchema {
   };
 }
 
+export interface ColorColor extends Struct.ComponentSchema {
+  collectionName: 'components_color_colors';
+  info: {
+    displayName: 'Farbe';
+    icon: 'paintBrush';
+  };
+  attributes: {
+    hex: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String;
+  };
+}
+
+export interface ContactContact extends Struct.ComponentSchema {
+  collectionName: 'components_contact_contacts';
+  info: {
+    displayName: 'Anschrift';
+    icon: 'pinMap';
+  };
+  attributes: {
+    address: Schema.Attribute.Component<'address.address', false>;
+    email: Schema.Attribute.Email;
+    mobile: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
-      'adresse.adresse': AdresseAdresse;
-      'anschrift.anschrift': AnschriftAnschrift;
-      'farbe.farbe': FarbeFarbe;
-      'klassengruppe.klassengruppe': KlassengruppeKlassengruppe;
+      'address.address': AddressAddress;
+      'class-group.class-group': ClassGroupClassGroup;
+      'color.color': ColorColor;
+      'contact.contact': ContactContact;
     }
   }
 }

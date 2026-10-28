@@ -15,7 +15,7 @@ export interface Address {
   city?: string | null;
 }
 
-export interface Anschrift {
+export interface Contact {
   name?: string | null;
   address?: Address | null;
   phone?: string | null;
@@ -23,30 +23,30 @@ export interface Anschrift {
   email?: string | null;
 }
 
-export interface Verein {
+export interface Club {
   id: number;
   documentId: string;
   name: string;
   logo?: StrapiMedia | null;
-  image?: StrapiMedia | null;
+  vehiclePhoto?: StrapiMedia | null;
   about?: string | null;
   website?: string | null;
-  founded?: string | null;
+  foundedYear?: number | null;
   sortName?: string | null;
-  president?: Anschrift | null;
+  president?: Contact | null;
   vehicleGraphic?: StrapiMedia | null;
   colors?: { id: number; name?: string | null; hex: string }[] | null;
   location?: string | null;
-  mailing?: Anschrift | null;
+  mailingAddress?: Contact | null;
 }
 
-export interface HomeContent {
+export interface Home {
   title: string;
   content: string;
   image?: StrapiMedia[] | null;
 }
 
-export interface DerBscv {
+export interface About {
   title?: string | null;
   intro?: string | null;
   fascinationTitle?: string | null;
@@ -55,7 +55,7 @@ export interface DerBscv {
   classGroups?: { id: number; title?: string | null; classes?: string | null }[] | null;
 }
 
-export interface Rennstrecke {
+export interface Track {
   documentId: string;
   name: string;
   address?: Address | null;
@@ -66,53 +66,53 @@ export interface Rennstrecke {
   description?: string | null;
 }
 
-export interface Race {
+export interface Event {
   documentId: string;
   title: string;
   date: string;
-  track?: Pick<Rennstrecke, "documentId" | "name" | "photo"> | null;
-  organiser?: Pick<Verein, "documentId" | "name"> | null;
-  albums?: Pick<Album, "documentId" | "title" | "url">[] | null;
+  track?: Pick<Track, "documentId" | "name" | "photo"> | null;
+  organizer?: Pick<Club, "documentId" | "name"> | null;
+  albums?: Pick<Album, "documentId" | "title" | "galleryUrl">[] | null;
 }
 
-export interface Punktewertung {
+export interface Standing {
   documentId: string;
   title: string;
-  sorting?: number | null;
+  position?: number | null;
   updatedAt: string;
   pdf?: StrapiMedia | null;
 }
 
-export interface Vorstand {
+export interface BoardMember {
   documentId: string;
   role: string;
   position?: number | null;
-  contact?: Anschrift | null;
+  contact?: Contact | null;
   photo?: StrapiMedia | null;
 }
 
-export interface Funktionaer {
+export interface Functionary {
   documentId: string;
   name: string;
-  club?: string | null;
+  clubName?: string | null;
   photo?: StrapiMedia | null;
 }
 
-export interface Funktion {
+export interface OfficialRole {
   documentId: string;
   name: string;
-  funktionaries?: Pick<Funktionaer, "documentId">[] | null;
+  functionaries?: Pick<Functionary, "documentId">[] | null;
 }
 
 export interface Album {
   documentId: string;
   title: string;
   date?: string | null;
-  url?: string | null;
+  galleryUrl?: string | null;
   preview?: StrapiMedia | null;
 }
 
-export interface Videograf {
+export interface Videographer {
   documentId: string;
   name: string;
   photo?: StrapiMedia | null;
@@ -123,17 +123,17 @@ export interface Videograf {
   linktree?: string | null;
 }
 
-export interface Seite {
+export interface Page {
   documentId: string;
   title: string;
   slug: string;
   content?: string | null;
 }
 
-export interface Dokument {
+export interface Download {
   documentId: string;
-  group: string;
-  label: string;
+  category: string;
+  title: string;
   file?: StrapiMedia | null;
 }
 
@@ -152,11 +152,12 @@ export interface Seitentexte {
   copyright?: string | null;
 }
 
-export interface Einstellung {
+export interface Maintenance {
   founded?: number | null;
   classCount?: number | null;
   mylapsUrl?: string | null;
   officeEmail?: string | null;
-  maintenanceMode?: boolean | null;
-  maintenanceText?: string | null;
+  enabled?: boolean | null;
+  title?: string | null;
+  text?: string | null;
 }

@@ -19,7 +19,7 @@ const Gallery = () => {
         {albums.map((album, i) => (
           <a
             key={album.documentId}
-            href={album.url ?? undefined}
+            href={album.galleryUrl ?? undefined}
             target="_blank"
             rel="noreferrer"
             className={`relative ${layout[i] ?? ""}`}

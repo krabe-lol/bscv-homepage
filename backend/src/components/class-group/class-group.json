@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_class_group_class_groups",
+  "info": {
+    "displayName": "Klassengruppe",
+    "icon": "bulletList",
+    "description": "Eine Klasse pro Zeile, \"---\" als Trenner"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "classes": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

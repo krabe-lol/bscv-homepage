@@ -1,0 +1,259 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::maintenance.maintenance",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "mainField": "mylapsUrl",
+      "defaultSortBy": "mylapsUrl",
+      "defaultSortOrder": "ASC",
+      "relationOpenMode": "modal"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "founded": {
+        "edit": {
+          "label": "founded",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "founded",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "classCount": {
+        "edit": {
+          "label": "classCount",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "classCount",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "mylapsUrl": {
+        "edit": {
+          "label": "mylapsUrl",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "mylapsUrl",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "officeEmail": {
+        "edit": {
+          "label": "officeEmail",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "officeEmail",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "enabled": {
+        "edit": {
+          "label": "Wartungsmodus",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Wartungsmodus",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "Wartungsseite: Titel",
+          "description": "Standard: Gleich wieder da",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Wartungsseite: Titel",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "text": {
+        "edit": {
+          "label": "Wartungsseite: Text",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Wartungsseite: Text",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "email": {
+        "edit": {
+          "label": "Wartungsseite: E-Mail",
+          "description": "Erscheint auf der Wartungsseite.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Wartungsseite: E-Mail",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "founded",
+        "classCount",
+        "mylapsUrl"
+      ],
+      "edit": [
+        [
+          {
+            "name": "founded",
+            "size": 6
+          },
+          {
+            "name": "classCount",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "mylapsUrl",
+            "size": 6
+          },
+          {
+            "name": "officeEmail",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "enabled",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "title",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "text",
+            "size": 6
+          },
+          {
+            "name": "email",
+            "size": 6
+          }
+        ]
+      ]
+    },
+    "uid": "api::maintenance.maintenance"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

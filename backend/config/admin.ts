@@ -15,6 +15,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => 
   secrets: {
     encryptionKey: env('ENCRYPTION_KEY'),
   },
+  // Export von Config Sync (siehe plugins.ts) soll Strapi in der Entwicklung nicht neu starten
+  watchIgnoreFiles: ['**/config/sync/**'],
   flags: {
     // Keine Umfragen und keine Werbung für die Bezahlversion im Admin
     nps: env.bool('FLAG_NPS', false),

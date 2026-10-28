@@ -1,0 +1,259 @@
+{
+  "key": "plugin_content_manager_configuration_content_types::api::about.about",
+  "value": {
+    "settings": {
+      "bulkable": true,
+      "filterable": true,
+      "searchable": true,
+      "pageSize": 10,
+      "relationOpenMode": "modal",
+      "mainField": "title",
+      "defaultSortBy": "title",
+      "defaultSortOrder": "ASC"
+    },
+    "metadatas": {
+      "id": {
+        "edit": {},
+        "list": {
+          "label": "id",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "title": {
+        "edit": {
+          "label": "title",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "title",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "intro": {
+        "edit": {
+          "label": "intro",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "intro",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "fascinationTitle": {
+        "edit": {
+          "label": "fascinationTitle",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "fascinationTitle",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "fascination": {
+        "edit": {
+          "label": "fascination",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "fascination",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "classesTitle": {
+        "edit": {
+          "label": "classesTitle",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "classesTitle",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "classGroups": {
+        "edit": {
+          "label": "classGroups",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "classGroups",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "foundedYear": {
+        "edit": {
+          "label": "Gründungsjahr",
+          "description": "Wird auf der Website derzeit nicht angezeigt.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Gründungsjahr",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "classCount": {
+        "edit": {
+          "label": "classCount",
+          "description": "Wird auf der Website derzeit nicht angezeigt.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "classCount",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdAt": {
+        "edit": {
+          "label": "createdAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "createdAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedAt": {
+        "edit": {
+          "label": "updatedAt",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true
+        },
+        "list": {
+          "label": "updatedAt",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "createdBy": {
+        "edit": {
+          "label": "createdBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "createdBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "updatedBy": {
+        "edit": {
+          "label": "updatedBy",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": true,
+          "mainField": "firstname"
+        },
+        "list": {
+          "label": "updatedBy",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "documentId": {
+        "edit": {},
+        "list": {
+          "label": "documentId",
+          "searchable": true,
+          "sortable": true
+        }
+      }
+    },
+    "layouts": {
+      "list": [
+        "id",
+        "title",
+        "intro",
+        "fascinationTitle"
+      ],
+      "edit": [
+        [
+          {
+            "name": "title",
+            "size": 6
+          },
+          {
+            "name": "intro",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "fascinationTitle",
+            "size": 6
+          },
+          {
+            "name": "fascination",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "classesTitle",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "classGroups",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "foundedYear",
+            "size": 4
+          },
+          {
+            "name": "classCount",
+            "size": 4
+          }
+        ]
+      ]
+    },
+    "uid": "api::about.about"
+  },
+  "type": "object",
+  "environment": null,
+  "tag": null
+}

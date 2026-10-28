@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "abouts",
+  "info": {
+    "singularName": "about",
+    "pluralName": "abouts",
+    "displayName": "Der BSCV (Sektion)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "intro": {
+      "type": "text"
+    },
+    "fascinationTitle": {
+      "type": "string"
+    },
+    "fascination": {
+      "type": "text"
+    },
+    "classesTitle": {
+      "type": "string"
+    },
+    "classGroups": {
+      "type": "component",
+      "component": "class-group.class-group",
+      "repeatable": true
+    },
+    "foundedYear": {
+      "type": "integer"
+    },
+    "classCount": {
+      "type": "integer"
+    }
+  }
+}

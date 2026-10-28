@@ -1,0 +1,13 @@
+{
+  "kind": "collectionType",
+  "collectionName": "downloads",
+  "info": { "singularName": "download", "pluralName": "downloads", "displayName": "Dokument" },
+  "options": { "draftAndPublish": true },
+  "pluginOptions": {},
+  "attributes": {
+    "category": { "type": "string" },
+    "title": { "type": "string" },
+    "file": { "type": "media", "multiple": false, "allowedTypes": ["files"] },
+    "position": { "type": "integer" }
+  }
+}
