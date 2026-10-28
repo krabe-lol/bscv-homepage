@@ -106,6 +106,17 @@ export interface Album {
   preview?: StrapiMedia | null;
 }
 
+export interface Videograf {
+  documentId: string;
+  name: string;
+  photo?: StrapiMedia | null;
+  description?: string | null;
+  youtube?: string | null;
+  instagram?: string | null;
+  website?: string | null;
+  linktree?: string | null;
+}
+
 export interface Seite {
   documentId: string;
   title: string;

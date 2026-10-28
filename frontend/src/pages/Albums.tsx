@@ -1,3 +1,4 @@
+import Videografen from "../components/albums/Videografen";
 import ImageSlot from "../components/ui/ImageSlot";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
@@ -19,6 +20,8 @@ const Albums = () => {
         title="Fotos & Videos"
         intro={texts?.albumsIntro ?? undefined}
       />
+
+      <Videografen />
 
       {years.map((year) => (
         <div key={year}>

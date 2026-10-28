@@ -892,6 +892,42 @@ export interface ApiVereinVerein extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiVideografVideograf extends Struct.CollectionTypeSchema {
+  collectionName: 'videografen';
+  info: {
+    description: 'Personen, die Videos der Veranstaltungen machen, mit Links zu ihren Kan\u00E4len. Erscheinen auf der Seite Fotos & Videos.';
+    displayName: 'Videograf';
+    pluralName: 'videografen';
+    singularName: 'videograf';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    instagram: Schema.Attribute.String;
+    linktree: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::videograf.videograf'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    photo: Schema.Attribute.Media<'images'>;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String;
+    youtube: Schema.Attribute.String;
+  };
+}
+
 export interface ApiVorstandVorstand extends Struct.CollectionTypeSchema {
   collectionName: 'vorstaende';
   info: {
@@ -1447,6 +1483,7 @@ declare module '@strapi/strapi' {
       'api::seitentext.seitentext': ApiSeitentextSeitentext;
       'api::veranstaltung.veranstaltung': ApiVeranstaltungVeranstaltung;
       'api::verein.verein': ApiVereinVerein;
+      'api::videograf.videograf': ApiVideografVideograf;
       'api::vorstand.vorstand': ApiVorstandVorstand;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
