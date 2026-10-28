@@ -33,7 +33,7 @@ const Collapsible = ({ id, title, className = "", children }: CollapsibleProps) 
           }
         />
       </summary>
-      <div className="pt-7">{children}</div>
+      <div className="pt-7 mb-20">{children}</div>
     </details>
   );
 };
