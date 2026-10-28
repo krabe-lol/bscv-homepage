@@ -98,6 +98,12 @@ export interface Funktionaer {
   photo?: StrapiMedia | null;
 }
 
+export interface Funktion {
+  documentId: string;
+  name: string;
+  funktionaries?: Pick<Funktionaer, "documentId">[] | null;
+}
+
 export interface Album {
   documentId: string;
   title: string;

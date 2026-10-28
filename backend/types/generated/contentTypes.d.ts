@@ -577,6 +577,40 @@ export interface ApiEinstellungEinstellung extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiFunktionFunktion extends Struct.CollectionTypeSchema {
+  collectionName: 'funktionen';
+  info: {
+    description: 'Aufgaben der Funktion\u00E4re (z. B. Spoko, Transponder, Rundenz\u00E4hlung). Auf der Startseite in der Reihenfolge von \u201Eposition\u201C.';
+    displayName: 'Funktion';
+    pluralName: 'funktionen';
+    singularName: 'funktion';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    funktionaries: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::funktionaer.funktionaer'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::funktion.funktion'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    position: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFunktionaerFunktionaer extends Struct.CollectionTypeSchema {
   collectionName: 'funktionaere';
   info: {
@@ -592,6 +626,7 @@ export interface ApiFunktionaerFunktionaer extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    function: Schema.Attribute.Relation<'manyToOne', 'api::funktion.funktion'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1474,6 +1509,7 @@ declare module '@strapi/strapi' {
       'api::der-bscv.der-bscv': ApiDerBscvDerBscv;
       'api::dokument.dokument': ApiDokumentDokument;
       'api::einstellung.einstellung': ApiEinstellungEinstellung;
+      'api::funktion.funktion': ApiFunktionFunktion;
       'api::funktionaer.funktionaer': ApiFunktionaerFunktionaer;
       'api::home.home': ApiHomeHome;
       'api::post.post': ApiPostPost;
