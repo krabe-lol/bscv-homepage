@@ -1,6 +1,8 @@
 # Deployt das Backend (cms.bscv.de) per SFTP nach Hetzner, sobald auf main etwas in backend/ oder an den
 # Build-/Deploy-Skripten geändert wird. Die .env, public/uploads, .strapi-updater.json und logs auf dem Server
 # bleiben unberührt.
+# Auf dev (und beim Start von Hand mit Haken bei „Trockenlauf“) wird nur gebaut und angezeigt, was sich auf dem
+# Server ändern würde; hochgeladen wird dann nichts.
 # Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY = Inhalt der privaten
 # Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase), inkl. BEGIN/END-Zeilen.
 # Der Runner braucht Docker, weil der Job in einem Container (node:22-bullseye) läuft.
@@ -8,16 +10,23 @@ name: Backend deployen
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     paths:
       - "backend/**"
       - "scripts/output.mjs"
       - "scripts/deploy.mjs"
+      - ".gitea/workflows/deploy-backend.yml"
   workflow_dispatch:
+    inputs:
+      trockenlauf:
+        description: "Trockenlauf: nur bauen und anzeigen, was sich auf dem Server ändern würde"
+        type: boolean
+        default: true
 
-# Zwei Deploys desselben Teils dürfen sich nicht überlappen
+# Zwei Deploys desselben Teils dürfen sich nicht überlappen; je Branch getrennt, damit ein Trockenlauf auf dev
+# keinen wartenden Deploy von main verdrängt
 concurrency:
-  group: deploy-backend
+  group: deploy-backend-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -25,6 +34,9 @@ jobs:
     runs-on: ubuntu-latest
     # Gleiches Node und glibc wie beim Build für den Hoster
     container: node:22-bullseye
+    env:
+      # "true" auf allen Branches außer main (dort wird also nie echt hochgeladen) und beim Start von Hand mit Haken
+      TROCKENLAUF: ${{ github.ref != 'refs/heads/main' || inputs.trockenlauf }}
     steps:
       - uses: actions/checkout@v4
 
@@ -44,9 +56,15 @@ jobs:
         run: node scripts/output.mjs --nur-cms
 
       - name: Per SFTP hochladen
-        run: node scripts/deploy.mjs cms
+        run: |
+          if [ "$TROCKENLAUF" = "true" ]; then
+            node scripts/deploy.mjs cms --dry-run
+          else
+            node scripts/deploy.mjs cms
+          fi
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
 
       - name: Hinweis zum Neustart
+        if: env.TROCKENLAUF != 'true'
         run: echo "Backend hochgeladen. Jetzt in konsoleH die Node.js-App für cms.bscv.de neu starten."

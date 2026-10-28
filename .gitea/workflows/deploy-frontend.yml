@@ -1,4 +1,6 @@
 # Deployt das Frontend (bscv.de) per SFTP nach Hetzner, sobald auf main etwas in frontend/ geändert wird.
+# Auf dev (und beim Start von Hand mit Haken bei „Trockenlauf“) wird nur gebaut und angezeigt, was sich auf dem
+# Server ändern würde; hochgeladen wird dann nichts.
 # Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY = Inhalt der privaten
 # Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase), inkl. BEGIN/END-Zeilen.
 # Der Runner braucht Docker, weil der Job in einem Container (node:22-bullseye) läuft.
@@ -6,14 +8,21 @@ name: Frontend deployen
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     paths:
       - "frontend/**"
+      - ".gitea/workflows/deploy-frontend.yml"
   workflow_dispatch:
+    inputs:
+      trockenlauf:
+        description: "Trockenlauf: nur bauen und anzeigen, was sich auf dem Server ändern würde"
+        type: boolean
+        default: true
 
-# Zwei Deploys desselben Teils dürfen sich nicht überlappen
+# Zwei Deploys desselben Teils dürfen sich nicht überlappen; je Branch getrennt, damit ein Trockenlauf auf dev
+# keinen wartenden Deploy von main verdrängt
 concurrency:
-  group: deploy-frontend
+  group: deploy-frontend-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -21,6 +30,9 @@ jobs:
     runs-on: ubuntu-latest
     # Gleiches Node und glibc wie beim Build für den Hoster
     container: node:22-bullseye
+    env:
+      # "true" auf allen Branches außer main (dort wird also nie echt hochgeladen) und beim Start von Hand mit Haken
+      TROCKENLAUF: ${{ github.ref != 'refs/heads/main' || inputs.trockenlauf }}
     steps:
       - uses: actions/checkout@v4
 
@@ -39,6 +51,11 @@ jobs:
         run: node scripts/output.mjs --nur-web
 
       - name: Per SFTP hochladen
-        run: node scripts/deploy.mjs web
+        run: |
+          if [ "$TROCKENLAUF" = "true" ]; then
+            node scripts/deploy.mjs web --dry-run
+          else
+            node scripts/deploy.mjs web
+          fi
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
