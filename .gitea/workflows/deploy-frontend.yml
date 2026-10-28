@@ -34,7 +34,11 @@ jobs:
       # "true" auf allen Branches außer main (dort wird also nie echt hochgeladen) und beim Start von Hand mit Haken
       TROCKENLAUF: ${{ github.ref != 'refs/heads/main' || inputs.trockenlauf }}
     steps:
+      # Gitea meldet sich bei den Jobs als http://server:3000, diesen Namen kennen die Job-Container aber nicht.
+      # Daher über die normale Adresse holen (brettchen und portfolio klonen ebenfalls von git.krabe.lol).
       - uses: actions/checkout@v4
+        with:
+          github-server-url: https://git.krabe.lol
 
       - name: lftp installieren
         run: apt-get update && apt-get install -y lftp openssh-client
