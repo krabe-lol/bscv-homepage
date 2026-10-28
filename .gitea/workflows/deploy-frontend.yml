@@ -1,8 +1,9 @@
 # Deployt das Frontend (bscv.de) per SFTP nach Hetzner, sobald auf main etwas in frontend/ geändert wird.
 # Auf dev (und beim Start von Hand mit Haken bei „Trockenlauf“) wird nur gebaut und angezeigt, was sich auf dem
 # Server ändern würde; hochgeladen wird dann nichts.
-# Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY = Inhalt der privaten
-# Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase), inkl. BEGIN/END-Zeilen.
+# Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY_B64 = private
+# Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase) Base64-kodiert in einer Zeile. Nicht als Klartext ablegen:
+# Mehrzeilige Secrets maskiert Gitea in der env-Anzeige der Logs nicht.
 # Der Runner braucht Docker, weil der Job in einem Container (node:22-bullseye) läuft.
 name: Frontend deployen
 
@@ -62,4 +63,4 @@ jobs:
             node scripts/deploy.mjs web
           fi
         env:
-          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}

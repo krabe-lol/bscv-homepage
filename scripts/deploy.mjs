@@ -4,7 +4,7 @@
 //   --ohne-node-modules                      → beim cms-Deploy node_modules auslassen (z. B. für schnelle Tests)
 //   --dry-run                                → lftp zeigt nur die Unterschiede, Einzeldateien werden nicht hochgeladen
 // Windows: lftp läuft in Docker (alpine), Schlüssel aus ~/.ssh/bscv_deploy (oder DEPLOY_SSH_KEY_FILE).
-// Linux (CI): lftp direkt, Schlüssel aus DEPLOY_SSH_KEY (Inhalt) oder DEPLOY_SSH_KEY_FILE (Pfad).
+// Linux (CI): lftp direkt, Schlüssel aus DEPLOY_SSH_KEY_B64 (Inhalt Base64-kodiert) oder DEPLOY_SSH_KEY_FILE (Pfad).
 import { spawnSync } from "node:child_process";
 import { existsSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { homedir, tmpdir } from "node:os";
@@ -62,14 +62,16 @@ let tempDir = null;
 try {
   // Schlüsselquelle bestimmen
   let keyFile = process.env.DEPLOY_SSH_KEY_FILE ?? (isLinux ? null : DEFAULT_KEY_FILE);
-  if (!keyFile && process.env.DEPLOY_SSH_KEY) {
+  // Base64 statt Klartext: Gitea maskiert mehrzeilige Secrets in der env-Anzeige der Logs nicht
+  if (!keyFile && process.env.DEPLOY_SSH_KEY_B64) {
+    const key = Buffer.from(process.env.DEPLOY_SSH_KEY_B64, "base64").toString("utf8");
     // OpenSSH verlangt Modus 600 und einen abschließenden Zeilenumbruch
     tempDir = mkdtempSync(path.join(tmpdir(), "deploy-"));
     keyFile = path.join(tempDir, "id");
-    writeFileSync(keyFile, process.env.DEPLOY_SSH_KEY.replace(/\r\n/g, "\n").trimEnd() + "\n", { mode: 0o600 });
+    writeFileSync(keyFile, key.replace(/\r\n/g, "\n").trimEnd() + "\n", { mode: 0o600 });
   }
   if (!keyFile || !existsSync(keyFile)) {
-    throw new Error("Kein SSH-Schlüssel gefunden. DEPLOY_SSH_KEY (Inhalt) oder DEPLOY_SSH_KEY_FILE (Pfad) setzen.");
+    throw new Error("Kein SSH-Schlüssel gefunden. DEPLOY_SSH_KEY_B64 (Inhalt Base64-kodiert) oder DEPLOY_SSH_KEY_FILE (Pfad) setzen.");
   }
 
   const lftpScript = (identity) =>
