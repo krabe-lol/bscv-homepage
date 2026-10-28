@@ -22,114 +22,72 @@
       },
       "title": {
         "edit": {
-          "label": "title",
+          "label": "Titel",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "title",
+          "label": "Titel",
           "searchable": true,
           "sortable": true
         }
       },
-      "intro": {
+      "stats": {
         "edit": {
-          "label": "intro",
-          "description": "",
+          "label": "Kennzahlen",
+          "description": "Erscheinen zwischen Titel und Text, Reihenfolge per Ziehen.",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "intro",
-          "searchable": true,
-          "sortable": true
+          "label": "Kennzahlen",
+          "searchable": false,
+          "sortable": false
         }
       },
-      "fascinationTitle": {
+      "content": {
         "edit": {
-          "label": "fascinationTitle",
-          "description": "",
+          "label": "Text",
+          "description": "Absätze, Zwischenüberschriften und Hervorhebungen über die Werkzeugleiste.",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "fascinationTitle",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "fascination": {
-        "edit": {
-          "label": "fascination",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "fascination",
-          "searchable": true,
-          "sortable": true
+          "label": "Text",
+          "searchable": false,
+          "sortable": false
         }
       },
       "classesTitle": {
         "edit": {
-          "label": "classesTitle",
+          "label": "Überschrift Klassen",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "classesTitle",
+          "label": "Überschrift Klassen",
           "searchable": true,
           "sortable": true
         }
       },
       "classGroups": {
         "edit": {
-          "label": "classGroups",
+          "label": "Klassengruppen",
           "description": "",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "classGroups",
+          "label": "Klassengruppen",
           "searchable": false,
           "sortable": false
-        }
-      },
-      "foundedYear": {
-        "edit": {
-          "label": "Gründungsjahr",
-          "description": "Wird auf der Website derzeit nicht angezeigt.",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "Gründungsjahr",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "classCount": {
-        "edit": {
-          "label": "classCount",
-          "description": "Wird auf der Website derzeit nicht angezeigt.",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "classCount",
-          "searchable": true,
-          "sortable": true
         }
       },
       "createdAt": {
@@ -203,50 +161,37 @@
       "list": [
         "id",
         "title",
-        "intro",
-        "fascinationTitle"
+        "stats"
       ],
       "edit": [
         [
           {
             "name": "title",
-            "size": 6
-          },
-          {
-            "name": "intro",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
-            "name": "fascinationTitle",
-            "size": 6
-          },
+            "name": "stats",
+            "size": 12
+          }
+        ],
+        [
           {
-            "name": "fascination",
-            "size": 6
+            "name": "content",
+            "size": 12
           }
         ],
         [
           {
             "name": "classesTitle",
-            "size": 6
+            "size": 12
           }
         ],
         [
           {
             "name": "classGroups",
             "size": 12
-          }
-        ],
-        [
-          {
-            "name": "foundedYear",
-            "size": 4
-          },
-          {
-            "name": "classCount",
-            "size": 4
           }
         ]
       ]

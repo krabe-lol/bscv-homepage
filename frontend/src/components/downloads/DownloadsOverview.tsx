@@ -4,15 +4,16 @@ import LinkList from "../ui/LinkList";
 import Tile from "../ui/Tile";
 import TileGrid from "../ui/TileGrid";
 import { mediaUrl } from "../../lib/api";
-import { useSeitentexte } from "../../lib/texts";
 import { useApi } from "../../lib/useApi";
-import type { Download, Maintenance } from "../../lib/types";
+import type { Download, SectionDocuments } from "../../lib/types";
 
 /** Dokumentgruppen als Kacheln – auf der Dokumente-Seite und der Startseite. */
 const DownloadsOverview = ({ className = "" }: { className?: string }) => {
   const documents = useApi<Download[]>("downloads?sort=position&populate=file&pagination[pageSize]=100").data ?? [];
-  const maintenance = useApi<Maintenance>("maintenance").data;
-  const texts = useSeitentexte();
+  const section = useApi<SectionDocuments>("section-documents").data;
+  // Ziele mit / bleiben in der Website, alles andere (https://, mailto:) ist ein normaler Link
+  const target = section?.licenseTileLinkUrl?.trim() || "/kontakt";
+  const linkProps = target.startsWith("/") ? { to: target } : { href: target };
   const groups = [...new Set(documents.map((d) => d.category))];
 
   return (
@@ -27,11 +28,11 @@ const DownloadsOverview = ({ className = "" }: { className?: string }) => {
             />
           </Tile>
         ))}
-        {texts && (
-          <Tile tone="brand" title={texts.licenseTileTitle ?? undefined}>
-            {texts.licenseTileText && <p className="mb-3.5 text-sm leading-relaxed text-on-brand">{texts.licenseTileText}</p>}
-            {texts.licenseTileLink && (
-              <Link iconRight={ChevronsRight} href={`mailto:${maintenance?.officeEmail ?? ""}`}>{texts.licenseTileLink}</Link>
+        {section && (
+          <Tile tone="brand" title={section.licenseTileTitle ?? undefined}>
+            {section.licenseTileText && <p className="mb-3.5 text-sm leading-relaxed text-on-brand">{section.licenseTileText}</p>}
+            {section.licenseTileLinkText && (
+              <Link iconRight={ChevronsRight} {...linkProps}>{section.licenseTileLinkText}</Link>
             )}
           </Tile>
         )}

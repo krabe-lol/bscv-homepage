@@ -1,11 +1,12 @@
 import axios from "axios";
-import { Contact as ContactIcon, Flag, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsRight } from "lucide-react";
+import { Contact as ContactIcon, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsRight } from "lucide-react";
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import ImageSlot from "../components/ui/ImageSlot";
 import Link from "../components/ui/Link";
 import PageHeader from "../components/ui/PageHeader";
 import Section, { GUTTER } from "../components/ui/Section";
+import StatList from "../components/ui/StatList";
 import { API_URL, mediaUrl } from "../lib/api";
 import { formatDate } from "../lib/format";
 import { EVENTS_PATH, getNextEvent, eventTitle } from "../lib/events";
@@ -17,6 +18,7 @@ const POPULATE = [
   "populate[vehiclePhoto]=true",
   "populate[vehicleGraphic]=true",
   "populate[colors]=true",
+  "populate[stats]=true",
   "populate[president][populate][0]=address",
   "populate[mailingAddress][populate][0]=address",
 ].join("&");
@@ -29,16 +31,6 @@ const Card = ({ title, icon: Icon, className = "", children }: { title: string; 
     </h2>
     {children}
   </section>
-);
-
-const Stat = ({ icon: Icon, value, label }: { icon: LucideIcon; value: ReactNode; label: string }) => (
-  <div className="flex items-center gap-3 bg-ink px-5 py-3">
-    <Icon className="h-5 w-5 shrink-0 text-accent" aria-hidden />
-    <div>
-      <div className="text-lg font-semibold leading-tight">{value}</div>
-      <div className="text-sm text-muted">{label}</div>
-    </div>
-  </div>
 );
 
 const ContactCard = ({ title, icon, contact }: { title: string; icon: LucideIcon; contact?: Contact | null }) => {
@@ -109,6 +101,7 @@ const ClubPage = () => {
   }
 
   const homeEvent = getNextEvent(events.filter((r) => r.organizer?.documentId === club.documentId));
+  const hasStats = !!club.stats?.some((s) => s.value?.trim());
   const hasSidebar = homeEvent || club.president || club.mailingAddress;
 
   return (
@@ -144,14 +137,10 @@ const ClubPage = () => {
           <div className="flex flex-col gap-8">
 
             {/* Über den Verein */}
-            {(club.about || club.foundedYear) && (
+            {(club.about || hasStats) && (
               <Card title="Über den Verein" icon={Info}>
                 {club.about && <p className="mb-6 max-w-2xl whitespace-pre-line text-base leading-relaxed text-body">{club.about}</p>}
-                {club.foundedYear && (
-                  <div className="flex flex-wrap gap-3">
-                    <Stat icon={Flag} value={club.foundedYear} label="Gründungsjahr" />
-                  </div>
-                )}
+                <StatList stats={club.stats} />
               </Card>
             )}
 

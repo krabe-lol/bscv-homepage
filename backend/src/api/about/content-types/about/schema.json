@@ -14,14 +14,13 @@
     "title": {
       "type": "string"
     },
-    "intro": {
-      "type": "text"
+    "stats": {
+      "type": "component",
+      "component": "stat.stat",
+      "repeatable": true
     },
-    "fascinationTitle": {
-      "type": "string"
-    },
-    "fascination": {
-      "type": "text"
+    "content": {
+      "type": "richtext"
     },
     "classesTitle": {
       "type": "string"
@@ -30,12 +29,6 @@
       "type": "component",
       "component": "class-group.class-group",
       "repeatable": true
-    },
-    "foundedYear": {
-      "type": "integer"
-    },
-    "classCount": {
-      "type": "integer"
     }
   }
 }

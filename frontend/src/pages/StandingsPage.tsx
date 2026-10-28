@@ -4,24 +4,22 @@ import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
 import { mediaUrl } from "../lib/api";
 import { formatDate } from "../lib/format";
-import { useSeitentexte } from "../lib/texts";
 import { useApi } from "../lib/useApi";
-import type { Maintenance, Standing } from "../lib/types";
+import type { Standing, StandingsPageEntry } from "../lib/types";
 
 const StandingsPage = () => {
   const standings = useApi<Standing[]>("standings?sort=position&populate=pdf&pagination[pageSize]=100").data ?? [];
-  const maintenance = useApi<Maintenance>("maintenance").data;
-  const texts = useSeitentexte();
+  const page = useApi<StandingsPageEntry>("standings-page").data;
 
   return (
     <Section spacing="page">
       <PageHeader
         title="Punktewertung"
-        intro={texts?.standingsIntro ?? undefined}
+        intro={page?.intro ?? undefined}
       />
-      {maintenance?.mylapsUrl && (
+      {page?.mylapsUrl && (
         <div className="mt-6">
-          <Link iconRight={ChevronsRight} href={maintenance.mylapsUrl}>Live-Zeiten bei MyLaps</Link>
+          <Link iconRight={ChevronsRight} href={page.mylapsUrl}>Live-Zeiten bei MyLaps</Link>
         </div>
       )}
       <div className="mt-11 grid grid-cols-1">

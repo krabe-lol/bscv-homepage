@@ -23,6 +23,13 @@ export interface Contact {
   email?: string | null;
 }
 
+export interface StatEntry {
+  id: number;
+  label: string;
+  value?: string | null;
+  icon?: string | null;
+}
+
 export interface Club {
   id: number;
   documentId: string;
@@ -31,7 +38,7 @@ export interface Club {
   vehiclePhoto?: StrapiMedia | null;
   about?: string | null;
   website?: string | null;
-  foundedYear?: number | null;
+  stats?: StatEntry[] | null;
   sortName?: string | null;
   president?: Contact | null;
   vehicleGraphic?: StrapiMedia | null;
@@ -48,9 +55,8 @@ export interface Home {
 
 export interface About {
   title?: string | null;
-  intro?: string | null;
-  fascinationTitle?: string | null;
-  fascination?: string | null;
+  content?: string | null;
+  stats?: StatEntry[] | null;
   classesTitle?: string | null;
   classGroups?: { id: number; title?: string | null; classes?: string | null }[] | null;
 }
@@ -137,27 +143,35 @@ export interface Download {
   file?: StrapiMedia | null;
 }
 
-export interface Seitentexte {
-  racesIntro?: string | null;
-  clubsIntro?: string | null;
-  albumsIntro?: string | null;
-  standingsIntro?: string | null;
-  contactIntro?: string | null;
-  notFoundIntro?: string | null;
-  licenseTileTitle?: string | null;
-  licenseTileText?: string | null;
-  licenseTileLink?: string | null;
+// Einzel-Einträge der Seiten (events-page, clubs-page, gallery-page, not-found-page)
+export interface IntroPage {
+  intro?: string | null;
+}
+
+export interface ContactPageEntry extends IntroPage {
   officeTileTitle?: string | null;
   officeTileText?: string | null;
+  officeEmail?: string | null;
+}
+
+export interface StandingsPageEntry extends IntroPage {
+  mylapsUrl?: string | null;
+}
+
+export interface SectionDocuments {
+  licenseTileTitle?: string | null;
+  licenseTileText?: string | null;
+  licenseTileLinkText?: string | null;
+  licenseTileLinkUrl?: string | null;
+}
+
+export interface FooterEntry {
   copyright?: string | null;
 }
 
 export interface Maintenance {
-  founded?: number | null;
-  classCount?: number | null;
-  mylapsUrl?: string | null;
-  officeEmail?: string | null;
   enabled?: boolean | null;
   title?: string | null;
   text?: string | null;
+  email?: string | null;
 }

@@ -76,18 +76,18 @@
           "sortable": true
         }
       },
-      "foundedYear": {
+      "stats": {
         "edit": {
-          "label": "Gründungsjahr",
-          "description": "",
+          "label": "Kennzahlen",
+          "description": "Gründungsjahr und Aktive Fahrer sind vorgegeben, weitere lassen sich hinzufügen.",
           "placeholder": "",
           "visible": true,
           "editable": true
         },
         "list": {
-          "label": "Gründungsjahr",
-          "searchable": true,
-          "sortable": true
+          "label": "Kennzahlen",
+          "searchable": false,
+          "sortable": false
         }
       },
       "president": {
@@ -275,10 +275,6 @@
         ],
         [
           {
-            "name": "foundedYear",
-            "size": 6
-          },
-          {
             "name": "location",
             "size": 6
           }
@@ -296,6 +292,12 @@
         [
           {
             "name": "about",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "stats",
             "size": 12
           }
         ],

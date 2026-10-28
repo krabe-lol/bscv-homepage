@@ -13,19 +13,16 @@
   Start überschreibt Strapi live alle Ansichten und die Rechte von Public und
   Authenticated mit dem Stand aus `backend/config/sync`. Danach prüfen, ob
   bscv.de alles anzeigt.
-- Seitentexte und Seiteneinstellung aufteilen, Schritt 1 auf `dev`
-  committet: neue Einzel-Einträge pro Seite bzw. Bereich (`*-page`,
-  `section-documents`, `footer`), dazu `founded`/`classCount` in Der
-  BSCV, `mylapsUrl` in Punktewertung, `officeEmail` in Kontakt und `email` in
-  Seiteneinstellung (Wartungsseite). Rechte für Public kommen mit Config Sync.
-  Die Website liest noch aus „Seitentexte“ und den alten Feldern der
-  Seiteneinstellung (`founded`, `classCount`, `mylapsUrl`, `officeEmail`). Nach
-  dem Deploy live (lokal teils schon erledigt) Texte und Werte von Hand
-  übertragen und veröffentlichen. Schritt 2: Frontend umstellen (Lizenz-Kachel
-  verlinkt dann auf `licenseTileLinkUrl`, leer = /kontakt, statt per Mail;
-  interne Ziele mit `/` als Router-Link, Wartungsseite nimmt `email` statt
-  `officeEmail`), „Seitentexte“ und in der Seiteneinstellung alles außer der
-  Wartung entfernen, samt Sync-Datei und Public-Recht.
+- Schritt 2 fertig (lokal, nicht committet): Website liest die neuen
+  Einzel-Einträge, „Seitentexte“, „Post“ und die alten Felder der
+  Seiteneinstellung sind entfernt. „Der BSCV“ hat Titel, Kennzahlen und
+  Freitext; Vereine haben Kennzahlen statt `foundedYear` (Komponente `stat`,
+  Vorgaben für neue Vereine in `backend/src/index.ts`). Migrationen
+  `merge-about-text` und `stats` übernehmen die Daten, getestet mit einer
+  Kopie der Live-Datenbank (Backup 2026-10-28_2203). Deploy wie zuvor: Backup,
+  Backend, Neustart, dann Frontend. Danach unter Rollen → Editor die neuen
+  Einzel-Einträge, Funktion und Videograf freigeben (Admin-Rollen kommen
+  nicht per Config Sync).
 - Felder und technische Typ-Namen auf Englisch umgestellt, im Frontend auch
   Typen, Dateien und Komponenten (Seiten heißen `*Page`), auf `dev` committet.
   Zwei Migrationen in `backend/database/migrations` übernehmen die Daten

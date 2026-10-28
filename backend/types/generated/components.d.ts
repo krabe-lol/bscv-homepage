@@ -52,6 +52,64 @@ export interface ContactContact extends Struct.ComponentSchema {
   };
 }
 
+export interface StatStat extends Struct.ComponentSchema {
+  collectionName: 'components_stat_stats';
+  info: {
+    description: 'Eine Kennzahl mit Bezeichnung, Wert und Symbol';
+    displayName: 'Kennzahl';
+    icon: 'chartBubble';
+  };
+  attributes: {
+    icon: Schema.Attribute.Enumeration<
+      [
+        'Ausbildung',
+        'Auszeichnung',
+        'Auto',
+        'Blitz',
+        'Daumen',
+        'Euro',
+        'Flagge',
+        'Flamme',
+        'Foto',
+        'Handschlag',
+        'Haus',
+        'Herz',
+        'Info',
+        'Kalender',
+        'Karte',
+        'Klassen',
+        'Krone',
+        'Lineal',
+        'LKW',
+        'Medaille',
+        'Megafon',
+        'Nummer',
+        'Ort',
+        'Person',
+        'Personen',
+        'Pokal',
+        'Prozent',
+        'Runden',
+        'Stern',
+        'Stoppuhr',
+        'Strecke',
+        'Tacho',
+        'Ticket',
+        'Treibstoff',
+        'Uhr',
+        'Werkzeug',
+        'Wimpel',
+        'Zahnrad',
+        'Zelt',
+        'Ziel',
+      ]
+    > &
+      Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    value: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
@@ -59,6 +117,7 @@ declare module '@strapi/strapi' {
       'class-group.class-group': ClassGroupClassGroup;
       'color.color': ColorColor;
       'contact.contact': ContactContact;
+      'stat.stat': StatStat;
     }
   }
 }

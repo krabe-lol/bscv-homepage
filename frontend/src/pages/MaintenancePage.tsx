@@ -14,10 +14,10 @@ const Notice = ({ maintenance }: { maintenance: Maintenance }) => (
   <Section spacing="page" className="min-h-[50svh]">
     <div className="mb-6 font-mono text-xs uppercase tracking-widest text-accent">Wartungsarbeiten</div>
     <PageHeader title={maintenance.title || DEFAULT_TITLE} intro={maintenance.text || DEFAULT_TEXT} />
-    {maintenance.officeEmail && (
+    {maintenance.email && (
       <div className="mt-8">
-        <Link iconRight={ChevronsRight} href={`mailto:${maintenance.officeEmail}`}>
-          {maintenance.officeEmail}
+        <Link iconRight={ChevronsRight} href={`mailto:${maintenance.email}`}>
+          {maintenance.email}
         </Link>
       </div>
     )}

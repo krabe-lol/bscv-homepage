@@ -1,0 +1,65 @@
+{
+  "collectionName": "components_stat_stats",
+  "info": {
+    "displayName": "Kennzahl",
+    "icon": "chartBubble",
+    "description": "Eine Kennzahl mit Bezeichnung, Wert und Symbol"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "Ausbildung",
+        "Auszeichnung",
+        "Auto",
+        "Blitz",
+        "Daumen",
+        "Euro",
+        "Flagge",
+        "Flamme",
+        "Foto",
+        "Handschlag",
+        "Haus",
+        "Herz",
+        "Info",
+        "Kalender",
+        "Karte",
+        "Klassen",
+        "Krone",
+        "Lineal",
+        "LKW",
+        "Medaille",
+        "Megafon",
+        "Nummer",
+        "Ort",
+        "Person",
+        "Personen",
+        "Pokal",
+        "Prozent",
+        "Runden",
+        "Stern",
+        "Stoppuhr",
+        "Strecke",
+        "Tacho",
+        "Ticket",
+        "Treibstoff",
+        "Uhr",
+        "Werkzeug",
+        "Wimpel",
+        "Zahnrad",
+        "Zelt",
+        "Ziel"
+      ],
+      "required": true
+    }
+  },
+  "config": {}
+}

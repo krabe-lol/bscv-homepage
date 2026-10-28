@@ -5,20 +5,19 @@ import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import { mediaUrl } from "../lib/api";
 import { formatDate } from "../lib/format";
-import { useSeitentexte } from "../lib/texts";
 import { useApi } from "../lib/useApi";
-import type { Album } from "../lib/types";
+import type { Album, IntroPage } from "../lib/types";
 
 const GalleryPage = () => {
   const albums = useApi<Album[]>("albums?sort=date:desc&populate=preview&pagination[pageSize]=200").data ?? [];
   const years = [...new Set(albums.map((a) => a.date?.slice(0, 4) ?? ""))];
-  const texts = useSeitentexte();
+  const page = useApi<IntroPage>("gallery-page").data;
 
   return (
     <Section spacing="page">
       <PageHeader
         title="Fotos & Videos"
-        intro={texts?.albumsIntro ?? undefined}
+        intro={page?.intro ?? undefined}
       />
 
       <Videographers />

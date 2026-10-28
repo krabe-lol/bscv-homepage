@@ -5,25 +5,13 @@
     "singularName": "maintenance",
     "pluralName": "maintenances",
     "displayName": "Seiteneinstellung",
-    "description": "Ist maintenanceMode an, sehen Besucher nur eine Wartungsseite mit maintenanceText (Impressum und Datenschutz bleiben erreichbar). Vorschau trotzdem über ?vorschau an der Adresse, beenden mit ?vorschau=aus."
+    "description": "Ist der Wartungsmodus an, sehen Besucher nur die Wartungsseite (Impressum und Datenschutz bleiben erreichbar). Vorschau trotzdem über ?vorschau an der Adresse, beenden mit ?vorschau=aus."
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "founded": {
-      "type": "integer"
-    },
-    "classCount": {
-      "type": "integer"
-    },
-    "mylapsUrl": {
-      "type": "string"
-    },
-    "officeEmail": {
-      "type": "email"
-    },
     "enabled": {
       "type": "boolean",
       "default": false

@@ -454,20 +454,17 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    classCount: Schema.Attribute.Integer;
     classesTitle: Schema.Attribute.String;
     classGroups: Schema.Attribute.Component<'class-group.class-group', true>;
+    content: Schema.Attribute.RichText;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    fascination: Schema.Attribute.Text;
-    fascinationTitle: Schema.Attribute.String;
-    foundedYear: Schema.Attribute.Integer;
-    intro: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::about.about'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    stats: Schema.Attribute.Component<'stat.stat', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -551,7 +548,6 @@ export interface ApiClubClub extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    foundedYear: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::club.club'> &
       Schema.Attribute.Private;
@@ -562,6 +558,7 @@ export interface ApiClubClub extends Struct.CollectionTypeSchema {
     president: Schema.Attribute.Component<'contact.contact', false>;
     publishedAt: Schema.Attribute.DateTime;
     sortName: Schema.Attribute.String;
+    stats: Schema.Attribute.Component<'stat.stat', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -848,7 +845,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
 export interface ApiMaintenanceMaintenance extends Struct.SingleTypeSchema {
   collectionName: 'maintenances';
   info: {
-    description: 'Ist maintenanceMode an, sehen Besucher nur eine Wartungsseite mit maintenanceText (Impressum und Datenschutz bleiben erreichbar). Vorschau trotzdem \u00FCber ?vorschau an der Adresse, beenden mit ?vorschau=aus.';
+    description: 'Ist der Wartungsmodus an, sehen Besucher nur die Wartungsseite (Impressum und Datenschutz bleiben erreichbar). Vorschau trotzdem \u00FCber ?vorschau an der Adresse, beenden mit ?vorschau=aus.';
     displayName: 'Seiteneinstellung';
     pluralName: 'maintenances';
     singularName: 'maintenance';
@@ -857,21 +854,17 @@ export interface ApiMaintenanceMaintenance extends Struct.SingleTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
-    classCount: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email;
     enabled: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    founded: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::maintenance.maintenance'
     > &
       Schema.Attribute.Private;
-    mylapsUrl: Schema.Attribute.String;
-    officeEmail: Schema.Attribute.Email;
     publishedAt: Schema.Attribute.DateTime;
     text: Schema.Attribute.Text;
     title: Schema.Attribute.String;
@@ -972,32 +965,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiPostPost extends Struct.CollectionTypeSchema {
-  collectionName: 'posts';
-  info: {
-    displayName: 'Post';
-    pluralName: 'posts';
-    singularName: 'post';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    content: Schema.Attribute.RichText;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::post.post'> &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiSectionDocumentsSectionDocuments
   extends Struct.SingleTypeSchema {
   collectionName: 'sections_documents';
@@ -1025,46 +992,6 @@ export interface ApiSectionDocumentsSectionDocuments
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiSeitentextSeitentext extends Struct.SingleTypeSchema {
-  collectionName: 'seitentexte';
-  info: {
-    description: 'Einleitungen der Seiten und Texte der Kacheln. In der Vereine-Einleitung wird {anzahl} durch die Zahl der Vereine ersetzt.';
-    displayName: 'Seitentexte';
-    pluralName: 'seitentexte';
-    singularName: 'seitentext';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    albumsIntro: Schema.Attribute.Text;
-    clubsIntro: Schema.Attribute.Text;
-    contactIntro: Schema.Attribute.Text;
-    copyright: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    licenseTileLink: Schema.Attribute.String;
-    licenseTileText: Schema.Attribute.Text;
-    licenseTileTitle: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::seitentext.seitentext'
-    > &
-      Schema.Attribute.Private;
-    notFoundIntro: Schema.Attribute.Text;
-    officeTileText: Schema.Attribute.Text;
-    officeTileTitle: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    racesIntro: Schema.Attribute.Text;
-    standingsIntro: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1749,9 +1676,7 @@ declare module '@strapi/strapi' {
       'api::not-found-page.not-found-page': ApiNotFoundPageNotFoundPage;
       'api::official-role.official-role': ApiOfficialRoleOfficialRole;
       'api::page.page': ApiPagePage;
-      'api::post.post': ApiPostPost;
       'api::section-documents.section-documents': ApiSectionDocumentsSectionDocuments;
-      'api::seitentext.seitentext': ApiSeitentextSeitentext;
       'api::standing.standing': ApiStandingStanding;
       'api::standings-page.standings-page': ApiStandingsPageStandingsPage;
       'api::track.track': ApiTrackTrack;

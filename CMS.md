@@ -13,7 +13,7 @@ Jeder Inhaltstyp hat zwei Namen: den deutschen im Admin (cms.bscv.de) und den te
 
 ## Einzel-Einträge
 
-Einzel-Einträge gibt es genau einmal, sie halten die Texte einer Seite oder eines Bereichs. Die Seiten-Einträge („… (Übersicht)“, Kontakt, 404, Dokumente, Fußzeile) liest die Website erst ab Schritt 2, bis dahin kommen die Texte noch aus Seitentexte.
+Einzel-Einträge gibt es genau einmal, sie halten die Texte einer Seite oder eines Bereichs.
 
 ### 404 - Seite nicht gefunden · `not-found-page`
 
@@ -25,14 +25,11 @@ Einzel-Einträge gibt es genau einmal, sie halten die Texte einer Seite oder ein
 
 | Beschriftung | Feldname | Typ | Zweck |
 | --- | --- | --- | --- |
-| – | `title` | Text | Überschrift der Sektion auf der Startseite |
-| – | `intro` | Langtext | Einleitungstext, Absätze per Leerzeile |
-| – | `fascinationTitle` | Text | Zwischenüberschrift über dem Faszinationstext |
-| – | `fascination` | Langtext | Text zur Faszination Stock-Car |
-| – | `classesTitle` | Text | Überschrift über den Klassen |
-| – | `classGroups` | Komponente Klassengruppe (mehrere) | Kacheln mit den Klassen |
-| Gründungsjahr | `foundedYear` | Zahl | wird nicht angezeigt |
-| – | `classCount` | Zahl | wird nicht angezeigt |
+| Titel | `title` | Text | Überschrift der Sektion auf der Startseite |
+| Kennzahlen | `stats` | Komponente Kennzahl (mehrere) | zwischen Titel und Text, z. B. Gründungsjahr, Klassen |
+| Text | `content` | Richtext | Freitext mit Absätzen, Zwischenüberschriften, Hervorhebungen |
+| Überschrift Klassen | `classesTitle` | Text | Überschrift über den Klassen |
+| Klassengruppen | `classGroups` | Komponente Klassengruppe (mehrere) | Kacheln mit den Klassen |
 
 ### Dokumente (Sektion) · `section-documents`
 
@@ -92,9 +89,7 @@ Einzel-Einträge gibt es genau einmal, sie halten die Texte einer Seite oder ein
 | Wartungsmodus | `enabled` | Ja/Nein | schaltet die ganze Website auf die Wartungsseite |
 | Wartungsseite: Titel | `title` | Text | Überschrift, leer = „Gleich wieder da“ |
 | Wartungsseite: Text | `text` | Langtext | Text der Wartungsseite |
-| Wartungsseite: E-Mail | `email` | E-Mail | Mail-Link der Wartungsseite (ab Schritt 2) |
-
-Dazu noch `founded`, `classCount`, `mylapsUrl` und `officeEmail` ohne Beschriftung, die mit Schritt 2 wegfallen.
+| Wartungsseite: E-Mail | `email` | E-Mail | Mail-Link der Wartungsseite |
 
 ### Vereine (Übersicht) · `clubs-page`
 
@@ -186,11 +181,11 @@ Sammlungen haben beliebig viele Einträge, z. B. einen pro Verein. Der technisch
 | --- | --- | --- | --- |
 | Vereinsname | `name` | Text | Name in Liste und auf der Vereinsseite |
 | Sortierungsname | `sortName` | Text | Sortierung der Vereinsliste |
-| Gründungsjahr | `foundedYear` | Zahl | auf der Vereinsseite |
 | Standort | `location` | Text | wird nicht angezeigt |
 | Website | `website` | Text | Link zur Vereinswebsite |
 | Vereinslogo | `logo` | Medien | Logo in Liste und auf der Vereinsseite |
 | Über den Verein | `about` | Richtext | Vorstellungstext |
+| Kennzahlen | `stats` | Komponente Kennzahl (mehrere) | unter dem Vorstellungstext; Gründungsjahr und Aktive Fahrer sind vorgegeben |
 | Vorstand | `president` | Komponente Anschrift | Kontakt „1. Vorstand“ |
 | Versandanschrift | `mailingAddress` | Komponente Anschrift | Kontakt „Versandanschrift“ |
 | Fahrzeugfoto | `vehiclePhoto` | Medien | Foto in der Liste und oben auf der Vereinsseite |
@@ -247,23 +242,19 @@ Komponenten sind Feldgruppen, die in mehreren Typen stecken, z. B. eine Anschrif
 | – | `name` | Text | wird nicht angezeigt |
 | – | `hex` | Text | Farbwert des Farbfelds (z. B. #C8102E) |
 
+### Kennzahl · `stat`
+
+| Beschriftung | Feldname | Typ | Zweck |
+| --- | --- | --- | --- |
+| Bezeichnung | `label` | Text | z. B. Gründungsjahr |
+| Wert | `value` | Text | z. B. 1978 oder über 300; ohne Wert nicht angezeigt |
+| Symbol | `icon` | Auswahl | Ausbildung, Auszeichnung, Auto, Blitz, Daumen, Euro, Flagge, Flamme, Foto, Handschlag, Haus, Herz, Info, Kalender, Karte, Klassen, Krone, Lineal, LKW, Medaille, Megafon, Nummer, Ort, Person, Personen, Pokal, Prozent, Runden, Stern, Stoppuhr, Strecke, Tacho, Ticket, Treibstoff, Uhr, Werkzeug, Wimpel, Zahnrad, Zelt, Ziel |
+
+Neue Vereine bekommen beim ersten Speichern automatisch „Gründungsjahr“ (Flagge) und „Aktive Fahrer“ (Auto), siehe `backend/src/index.ts`.
+
 ### Klassengruppe · `class-group`
 
 | Beschriftung | Feldname | Typ | Zweck |
 | --- | --- | --- | --- |
 | – | `title` | Text | Titel der Klassen-Kachel |
 | – | `classes` | Langtext | Klassen, eine pro Zeile |
-
-## Was mit Schritt 2 wegfällt
-
-Sobald die Texte live übertragen sind, stellt die Website um und diese Teile werden entfernt:
-
-| Was | Wohin es gewandert ist |
-| --- | --- |
-| Seitentexte (ganzer Eintrag) | in die einzelnen Seiten-Einträge, Copyright in Fußzeile |
-| Seiteneinstellung: `founded`, `classCount` | Der BSCV (Sektion) |
-| Seiteneinstellung: `mylapsUrl` | Punktewertung (Übersicht) |
-| Seiteneinstellung: `officeEmail` | Kontakt; Wartungsseite nutzt dann `email` |
-| Post (ganzer Typ) | wird nicht genutzt, wird gelöscht |
-
-Danach enthält die Seiteneinstellung nur noch die Wartung.

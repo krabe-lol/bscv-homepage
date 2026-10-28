@@ -6,8 +6,8 @@
       "filterable": true,
       "searchable": true,
       "pageSize": 10,
-      "mainField": "mylapsUrl",
-      "defaultSortBy": "mylapsUrl",
+      "mainField": "title",
+      "defaultSortBy": "title",
       "defaultSortOrder": "ASC",
       "relationOpenMode": "modal"
     },
@@ -16,62 +16,6 @@
         "edit": {},
         "list": {
           "label": "id",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "founded": {
-        "edit": {
-          "label": "founded",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "founded",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "classCount": {
-        "edit": {
-          "label": "classCount",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "classCount",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "mylapsUrl": {
-        "edit": {
-          "label": "mylapsUrl",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "mylapsUrl",
-          "searchable": true,
-          "sortable": true
-        }
-      },
-      "officeEmail": {
-        "edit": {
-          "label": "officeEmail",
-          "description": "",
-          "placeholder": "",
-          "visible": true,
-          "editable": true
-        },
-        "list": {
-          "label": "officeEmail",
           "searchable": true,
           "sortable": true
         }
@@ -201,32 +145,9 @@
     },
     "layouts": {
       "list": [
-        "id",
-        "founded",
-        "classCount",
-        "mylapsUrl"
+        "id"
       ],
       "edit": [
-        [
-          {
-            "name": "founded",
-            "size": 6
-          },
-          {
-            "name": "classCount",
-            "size": 6
-          }
-        ],
-        [
-          {
-            "name": "mylapsUrl",
-            "size": 6
-          },
-          {
-            "name": "officeEmail",
-            "size": 6
-          }
-        ],
         [
           {
             "name": "enabled",
@@ -236,7 +157,7 @@
         [
           {
             "name": "title",
-            "size": 6
+            "size": 12
           }
         ],
         [

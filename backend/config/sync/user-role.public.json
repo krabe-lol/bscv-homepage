@@ -131,23 +131,8 @@
       "locale": null
     },
     {
-      "documentId": "n0xkd99ibg273y5ztedh34ix",
-      "action": "api::post.post.find",
-      "locale": null
-    },
-    {
-      "documentId": "kagcjjetjczw53dvfuu9r0q2",
-      "action": "api::post.post.findOne",
-      "locale": null
-    },
-    {
       "documentId": "ojmciob1xyaqg8ohvdj9m7h4",
       "action": "api::section-documents.section-documents.find",
-      "locale": null
-    },
-    {
-      "documentId": "jye99bz6vrxsbjszwfm9vthy",
-      "action": "api::seitentext.seitentext.find",
       "locale": null
     },
     {

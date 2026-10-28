@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import Logo from "./ui/Logo";
-import { useSeitentexte } from "../lib/texts";
+import { useApi } from "../lib/useApi";
+import type { FooterEntry } from "../lib/types";
 
 const Footer = () => {
-  const texts = useSeitentexte();
+  const footer = useApi<FooterEntry>("footer").data;
 
   return (
     <footer className="px-4 sm:px-8 md:px-12 lg:px-30 mt-14 md:mt-24 grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] items-start gap-x-12 gap-y-10 border-t border-line py-11">
@@ -36,9 +37,9 @@ const Footer = () => {
           </nav>
         </div>
         {/* Jahr immer aktuell, Verbandsname aus Strapi */}
-        {texts?.copyright && (
+        {footer?.copyright && (
           <div className="font-mono text-xs tracking-wider text-dim">
-            © {new Date().getFullYear()} {texts.copyright}
+            © {new Date().getFullYear()} {footer.copyright}
           </div>
         )}
       </div>

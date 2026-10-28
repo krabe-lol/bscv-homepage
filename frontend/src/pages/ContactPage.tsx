@@ -6,25 +6,23 @@ import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import Tile from "../components/ui/Tile";
 import TileGrid from "../components/ui/TileGrid";
-import { useSeitentexte } from "../lib/texts";
 import { useApi } from "../lib/useApi";
-import type { Maintenance } from "../lib/types";
+import type { ContactPageEntry } from "../lib/types";
 
 const ContactPage = () => {
-  const maintenance = useApi<Maintenance>("maintenance").data;
-  const texts = useSeitentexte();
+  const page = useApi<ContactPageEntry>("contact-page").data;
 
   return (
     <Section spacing="page">
       <PageHeader
         title="Kontakt"
-        intro={texts?.contactIntro ?? undefined}
+        intro={page?.intro ?? undefined}
       />
 
       <TileGrid cols="fit-280" bordered className="mt-11">
-        <Tile tone="brand" title={texts?.officeTileTitle ?? undefined}>
-          {texts?.officeTileText && <p className="mb-3.5 text-sm leading-relaxed text-on-brand">{texts.officeTileText}</p>}
-          {maintenance?.officeEmail && <Link iconRight={ChevronsRight} href={`mailto:${maintenance.officeEmail}`}>{maintenance.officeEmail}</Link>}
+        <Tile tone="brand" title={page?.officeTileTitle ?? undefined}>
+          {page?.officeTileText && <p className="mb-3.5 text-sm leading-relaxed text-on-brand">{page.officeTileText}</p>}
+          {page?.officeEmail && <Link iconRight={ChevronsRight} href={`mailto:${page.officeEmail}`}>{page.officeEmail}</Link>}
         </Tile>
       </TileGrid>
 

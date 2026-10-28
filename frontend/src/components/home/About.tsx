@@ -1,15 +1,16 @@
+import Markdown from "../ui/Markdown";
 import Section from "../ui/Section";
+import StatList from "../ui/StatList";
 import Tile from "../ui/Tile";
 import TileGrid from "../ui/TileGrid";
 import { useApi } from "../../lib/useApi";
 import type { About as AboutData } from "../../lib/types";
 
-// Absätze sind in Strapi durch Leerzeilen getrennt, Klassen stehen je in einer Zeile
-const paragraphs = (text?: string | null) => (text ?? "").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+// Klassen stehen in Strapi je in einer Zeile
 const lines = (text?: string | null) => (text ?? "").split("\n").map((l) => l.trim()).filter(Boolean);
 
 const About = () => {
-  const about = useApi<AboutData>("about?populate=classGroups").data;
+  const about = useApi<AboutData>("about?populate[classGroups]=true&populate[stats]=true").data;
 
   return (
   <Section id="bscv">
@@ -19,20 +20,8 @@ const About = () => {
         <h2 className="mb-7 break-words hyphens-auto font-display text-3xl md:text-5xl font-bold uppercase leading-none tracking-tight">
           {about.title}
         </h2>
-        {paragraphs(about.intro).map((p, i) => (
-          <p key={i} className="mb-5 text-lg leading-relaxed text-body">
-            {p}
-          </p>
-        ))}
-
-        <div id="faszination" className="mt-11">
-          <div className="text-muted">{about.fascinationTitle}</div>
-          {paragraphs(about.fascination).map((p, i) => (
-            <p key={i} className={`${i === 0 ? "mt-5" : "mt-4"} text-base leading-relaxed text-body`}>
-              {p}
-            </p>
-          ))}
-        </div>
+        <StatList stats={about.stats} className="bg-panel" wrapperClassName="mb-6" />
+        {about.content && <Markdown>{about.content}</Markdown>}
       </div>
 
       <div id="klassen">
