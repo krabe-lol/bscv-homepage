@@ -2,6 +2,8 @@
 //   npm run output              → output/web (bscv.de) und output/cms (cms.bscv.de, inkl. node_modules für Linux)
 //   npm run output -- --nur-env → nur output/cms/.env aus backend/.env.server neu schreiben
 //   --nur-web / --nur-cms       → nur einen Teil bauen (und nur diesen Teil von output/ leeren), z. B. in der CI
+//   --ohne-node-modules         → beim Backend keine node_modules installieren (wenn die auf dem Server aktuell sind,
+//                                 siehe deploy.mjs --lock-vergleichen)
 // Unter Linux (CI) werden die node_modules direkt installiert, ohne Docker.
 // Datenbank ist PostgreSQL bei Hetzner; Inhalte kommen per `strapi transfer`, nicht per FTP.
 import { execSync } from "node:child_process";
@@ -32,6 +34,7 @@ if (onlyWeb && onlyCms) {
 }
 const buildWeb = !onlyCms;
 const buildCms = !onlyWeb;
+const skipModules = process.argv.includes("--ohne-node-modules");
 const isLinux = process.platform === "linux";
 
 const run = (cmd, cwd, env = {}) => execSync(cmd, { cwd, stdio: "inherit", env: { ...process.env, ...env } });
@@ -109,7 +112,7 @@ if (process.argv.includes("--nur-env")) {
 }
 
 // Docker nur auf Nicht-Linux-Systemen (Windows) nötig, dort für die Linux-node_modules
-if (buildCms && !isLinux) {
+if (buildCms && !isLinux && !skipModules) {
   try {
     execSync("docker info", { stdio: "ignore" });
   } catch {
@@ -131,20 +134,25 @@ if (buildWeb) {
 if (buildCms) {
   console.log("\n=== Backend ===");
   run("npm run build", backend, { NODE_ENV: "production" });
-  // Leere Ordner mit .gitkeep: Strapi bricht ohne public/uploads ab
-  for (const file of ["dist", "package.json", "package-lock.json", "server.js", "favicon.png", "public/robots.txt", "public/uploads/.gitkeep", "database/migrations/.gitkeep"]) {
+  // Leere Ordner mit .gitkeep: Strapi bricht ohne public/uploads ab. config/sync: Ansichten und Rollenrechte, die
+  // Config Sync beim Start einspielt (siehe backend/config/plugins.ts)
+  for (const file of ["dist", "config/sync", "package.json", "package-lock.json", "server.js", "favicon.png", "public/robots.txt", "public/uploads/.gitkeep", "database/migrations"]) {
     copy(path.join(backend, file), path.join(cms, file));
   }
   if (secrets) writeServerEnv();
 
-  console.log(isLinux ? "\n=== node_modules (Linux) ===" : "\n=== node_modules für Linux (Docker) ===");
-  // --no-bin-links: keine Symlinks, die lassen sich per FTP nicht hochladen
-  if (isLinux) {
-    run("npm ci --omit=dev --no-bin-links --no-audit --no-fund", cms);
+  if (skipModules) {
+    console.log("\nnode_modules übersprungen (--ohne-node-modules).");
   } else {
-    // Gleiche npm-Version wie lokal, sonst hält das npm im Image die package-lock.json für veraltet.
-    const npmVersion = execSync("npm -v").toString().trim();
-    run(`docker run --rm --mount type=bind,source=${cms},target=/app -w /app ${NODE_IMAGE} npx --yes npm@${npmVersion} ci --omit=dev --no-bin-links --no-audit --no-fund`, root);
+    console.log(isLinux ? "\n=== node_modules (Linux) ===" : "\n=== node_modules für Linux (Docker) ===");
+    // --no-bin-links: keine Symlinks, die lassen sich per FTP nicht hochladen
+    if (isLinux) {
+      run("npm ci --omit=dev --no-bin-links --no-audit --no-fund", cms);
+    } else {
+      // Gleiche npm-Version wie lokal, sonst hält das npm im Image die package-lock.json für veraltet.
+      const npmVersion = execSync("npm -v").toString().trim();
+      run(`docker run --rm --mount type=bind,source=${cms},target=/app -w /app ${NODE_IMAGE} npx --yes npm@${npmVersion} ci --omit=dev --no-bin-links --no-audit --no-fund`, root);
+    }
   }
 }
 

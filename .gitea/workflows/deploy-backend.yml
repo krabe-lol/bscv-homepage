@@ -23,6 +23,10 @@ on:
         description: "Trockenlauf: nur bauen und anzeigen, was sich auf dem Server ändern würde"
         type: boolean
         default: true
+      node_modules_erzwingen:
+        description: "node_modules immer neu installieren und hochladen (auch wenn die package-lock.json gleich ist)"
+        type: boolean
+        default: false
 
 # Zwei Deploys desselben Teils dürfen sich nicht überlappen; je Branch getrennt, damit ein Trockenlauf auf dev
 # keinen wartenden Deploy von main verdrängt
@@ -57,15 +61,30 @@ jobs:
         run: npm ci
         working-directory: backend
 
+      # node_modules ändern sich nur mit der package-lock.json. Ist die auf dem Server gleich der im Repo, entfallen
+      # das zweite npm ci und das Hochladen von node_modules (spart rund 2 Minuten). Klappt der Vergleich nicht,
+      # wird wie bisher alles hochgeladen.
+      - name: package-lock.json mit dem Server vergleichen
+        # format(): Häkchen kann als Boolean oder als Text "true" ankommen; bei push gibt es keine inputs
+        if: format('{0}', inputs.node_modules_erzwingen) != 'true'
+        run: |
+          if node scripts/deploy.mjs cms --lock-vergleichen; then
+            echo "OHNE_NODE_MODULES=--ohne-node-modules" >> "$GITHUB_ENV"
+          else
+            echo "node_modules werden neu installiert und hochgeladen."
+          fi
+        env:
+          DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
+
       - name: Backend bauen
-        run: node scripts/output.mjs --nur-cms
+        run: node scripts/output.mjs --nur-cms $OHNE_NODE_MODULES
 
       - name: Per SFTP hochladen
         run: |
           if [ "$TROCKENLAUF" = "true" ]; then
-            node scripts/deploy.mjs cms --dry-run
+            node scripts/deploy.mjs cms --dry-run $OHNE_NODE_MODULES
           else
-            node scripts/deploy.mjs cms
+            node scripts/deploy.mjs cms $OHNE_NODE_MODULES
           fi
         env:
           DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
