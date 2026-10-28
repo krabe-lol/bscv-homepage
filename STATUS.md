@@ -8,13 +8,13 @@
   Der erste echte Deploy war erfolgreich, `.env` und Uploads blieben unberührt.
 
 ## Offene Aufgaben
-- Config Sync und schnellerer Backend-Deploy sind fertig, aber noch nicht
-  committet. Vor dem ersten Deploy auf `main` `npm run backup`: Beim ersten
+- Config Sync und schnellerer Backend-Deploy sind auf `dev` committet, noch
+  nicht deployt. Vor dem ersten Deploy auf `main` `npm run backup`: Beim ersten
   Start überschreibt Strapi live alle Ansichten und die Rechte von Public und
   Authenticated mit dem Stand aus `backend/config/sync`. Danach prüfen, ob
   bscv.de alles anzeigt.
-- Seitentexte und Seiteneinstellung aufteilen, Schritt 1 fertig (nicht
-  committet): neue Einzel-Einträge pro Seite bzw. Bereich (`*-page`,
+- Seitentexte und Seiteneinstellung aufteilen, Schritt 1 auf `dev`
+  committet: neue Einzel-Einträge pro Seite bzw. Bereich (`*-page`,
   `section-documents`, `footer`), dazu `founded`/`classCount` in Der
   BSCV, `mylapsUrl` in Punktewertung, `officeEmail` in Kontakt und `email` in
   Seiteneinstellung (Wartungsseite). Rechte für Public kommen mit Config Sync.
@@ -27,7 +27,7 @@
   `officeEmail`), „Seitentexte“ und in der Seiteneinstellung alles außer der
   Wartung entfernen, samt Sync-Datei und Public-Recht.
 - Felder und technische Typ-Namen auf Englisch umgestellt, im Frontend auch
-  Typen, Dateien und Komponenten (Seiten heißen `*Page`) (nicht committet).
+  Typen, Dateien und Komponenten (Seiten heißen `*Page`), auf `dev` committet.
   Zwei Migrationen in `backend/database/migrations` übernehmen die Daten
   (`rename-fields`, dann `rename-types`), getestet mit SQLite und mit
   PostgreSQL 16 in Docker ab dem Live-Stand, inkl. Rechten von Public und
