@@ -16,16 +16,16 @@ const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number
   const titleRest = titleWords.join(" ");
 
   return (
-    <Section spacing="none" className="flex flex-wrap items-stretch">
+    <Section spacing="none" gutter="nav" className="flex flex-wrap items-stretch">
       <MediaPanel
         src={mediaUrl(home?.image?.[0]?.url)}
         alt="Stock-Car-Rennen"
         placeholder="Rennfoto – Stock-Car im Dreck"
         overlay="ink-gradient"
-        className="min-h-112 min-w-0 grow-1000 basis-95 sm:min-h-105"
+        className="@container flex min-h-112 min-w-0 grow-1000 basis-95 flex-col justify-end sm:min-h-105"
       >
-        <div className="pointer-events-none absolute bottom-6 left-5 right-5 sm:bottom-10 sm:left-10 sm:right-10">
-          <h1 className="mb-6 max-w-5xl text-balance break-words hyphens-auto font-display text-4xl sm:text-6xl md:text-8xl font-bold uppercase leading-none tracking-tight">
+        <div className="pointer-events-none relative px-5 pb-6 pt-24 sm:px-10 sm:pb-10 lg:pt-10">
+          <h1 className="mb-6 max-w-5xl text-balance break-words hyphens-auto font-display text-4xl sm:text-6xl md:text-8xl lg:text-[length:min(6rem,calc((100cqi-5rem)/6.4))] font-bold uppercase leading-none tracking-tight">
             {titleFirst}
             <br />
             {titleRest}
@@ -34,8 +34,8 @@ const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number
         </div>
       </MediaPanel>
 
-      <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:w-[calc((100svh-280px)/2)] lg:grid-cols-1">
-        <div className="flex flex-col justify-end bg-brand px-5 py-7 lg:aspect-square lg:px-8 lg:py-9">
+      <div className="grid w-full grid-cols-1 sm:grid-cols-2 lg:w-[calc((100svh-280px)/2)] lg:grid-cols-[minmax(0,1fr)] lg:grid-rows-[repeat(2,minmax(min-content,1fr))]">
+        <div className="flex flex-col justify-end bg-brand px-5 py-7 lg:aspect-square lg:justify-self-stretch lg:self-stretch lg:px-8 lg:py-9">
           <div className="mb-7 text-3xl font-semibold lg:text-4xl leading-none">
             {clubCount || ""}
             <br />
@@ -49,7 +49,7 @@ const Hero = ({ home, clubCount }: { home: HomeContent | null; clubCount: number
           alt={nextRace?.track?.photo?.url ? `Rennstrecke ${nextRace.track.name}` : "Luftbild Rennstrecke"}
           placeholder="Luftbild Rennstrecke"
           overlay="navy"
-          className="flex flex-col justify-end gap-2.5 px-5 py-7 lg:aspect-square lg:px-8 lg:py-9"
+          className="flex flex-col justify-end gap-2.5 px-5 py-7 lg:aspect-square lg:justify-self-stretch lg:self-stretch lg:px-8 lg:py-9"
         >
           <div className="pointer-events-none relative">
             <div className="mb-3.5 text-sm text-hero-label">Nächste Veranstaltung</div>
