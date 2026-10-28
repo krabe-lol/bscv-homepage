@@ -8,6 +8,13 @@
   Der erste echte Deploy war erfolgreich, `.env` und Uploads blieben unberührt.
 
 ## Offene Aufgaben
+- Release vom 28.10.2026 (Videokanäle, Funktionsgruppen der Funktionäre,
+  Hero-Fix) auf cms.bscv.de nachziehen: Node.js-App neu starten, dann im
+  Admin unter Einstellungen → Rollen → Public bei „Videograf“ und „Funktion“
+  `find` (und `findOne`) freigeben. Ohne Freigabe fehlen die Videokanäle und
+  die Funktionäre bleiben ungruppiert. Danach live Funktionen anlegen, jedem
+  Funktionär seine Funktion zuordnen (eine pro Person) und neu
+  veröffentlichen, Videografen anlegen.
 - Neustart nach Backend-Deploys ist Handarbeit. Offen beim Hetzner-Support:
   Startet ein beendeter Node.js-Prozess automatisch neu?
 - Altes Secret `DEPLOY_SSH_KEY` in Gitea löschen, falls noch vorhanden.
@@ -30,6 +37,9 @@
   `backups/` (Datenbank-Dump und Uploads).
 
 ## Bekannte Probleme
+- Startseite: Bei ab 1024 px breiten, aber sehr hohen Fenstern (z. B. iPad Pro
+  hochkant, 1024×1366) rutscht die rechte Kachelspalte im Hero unter das Bild
+  und wird zu einer riesigen roten Kachel (Breite hängt an `100svh`).
 - konsoleH hat Node.js einmal für bscv.de statt für cms.bscv.de aktiviert.
   Nach Änderungen an der Node.js-Konfiguration prüfen, welche Domain betroffen
   ist.
