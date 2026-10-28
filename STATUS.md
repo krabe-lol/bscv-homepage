@@ -13,7 +13,7 @@
   Start überschreibt Strapi live alle Ansichten und die Rechte von Public und
   Authenticated mit dem Stand aus `backend/config/sync`. Danach prüfen, ob
   bscv.de alles anzeigt.
-- Schritt 2 fertig (lokal, nicht committet): Website liest die neuen
+- Schritt 2 auf `dev` committet, noch nicht live: Website liest die neuen
   Einzel-Einträge, „Seitentexte“, „Post“ und die alten Felder der
   Seiteneinstellung sind entfernt. „Der BSCV“ hat Titel, Kennzahlen und
   Freitext; Vereine haben Kennzahlen statt `foundedYear` (Komponente `stat`,
