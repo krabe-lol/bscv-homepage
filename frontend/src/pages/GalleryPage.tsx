@@ -1,4 +1,5 @@
 import Videographers from "../components/gallery/Videographers";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import ImageSlot from "../components/ui/ImageSlot";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
@@ -15,6 +16,7 @@ const GalleryPage = () => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: "Fotos & Videos" }]} className="mb-6 md:mb-8" />
       <PageHeader
         title="Fotos & Videos"
         intro={page?.intro ?? undefined}

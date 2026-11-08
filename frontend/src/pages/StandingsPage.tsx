@@ -1,4 +1,5 @@
 import { ChevronsRight } from "lucide-react";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import Link from "../components/ui/Link";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
@@ -13,6 +14,7 @@ const StandingsPage = () => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: "Punktewertung" }]} className="mb-6 md:mb-8" />
       <PageHeader
         title="Punktewertung"
         intro={page?.intro ?? undefined}

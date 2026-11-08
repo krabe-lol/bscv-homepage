@@ -1,3 +1,4 @@
+import Breadcrumb from "../components/ui/Breadcrumb";
 import Markdown from "../components/ui/Markdown";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
@@ -11,6 +12,7 @@ const ContentPage = ({ slug }: { slug: string }) => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: page?.title ?? "" }]} className="mb-6 md:mb-8" />
       <PageHeader title={page?.title ?? ""} />
       <div className="mt-11">
         {data && !page ? <p className="text-muted">Seite nicht gefunden.</p> : <Markdown>{page?.content ?? ""}</Markdown>}

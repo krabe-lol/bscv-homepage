@@ -2,6 +2,7 @@ import axios from "axios";
 import { ChevronsRight, Flag, Info, MapPin, type LucideIcon } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import GalleryLinks from "../components/ui/GalleryLinks";
 import Link from "../components/ui/Link";
 import MapEmbed from "../components/ui/MapEmbed";
@@ -44,6 +45,7 @@ const TrackPage = () => {
   if (loaded && !track) {
     return (
       <Section spacing="page">
+        <Breadcrumb items={[{ label: "Rennstrecken", to: "/rennstrecken" }]} className="mb-6 md:mb-8" />
         <PageHeader title="Rennstrecke nicht gefunden" />
         <Link iconRight={ChevronsRight} to="/renntermine#rennstrecken">zurück zu den Rennstrecken</Link>
       </Section>
@@ -53,7 +55,8 @@ const TrackPage = () => {
   if (!track) {
     return (
       <Section spacing="page" className="min-h-96 text-muted">
-        Lädt …
+        <Breadcrumb items={[{ label: "Rennstrecken", to: "/rennstrecken" }]} className="mb-6 md:mb-8" />
+        <div>Lädt …</div>
       </Section>
     );
   }
@@ -89,6 +92,9 @@ const TrackPage = () => {
             <img src={mediaUrl(track.photo.url)} alt={`Foto der Strecke ${track.name}`} className="w-full h-full object-cover" />
           </div>
         )}
+        <div className={`absolute inset-x-0 top-0 z-10 pt-10 md:pt-16 ${GUTTER}`}>
+          <Breadcrumb items={[{ label: "Rennstrecken", to: "/rennstrecken" }, { label: track.name }]} />
+        </div>
         <div className={`relative w-full pt-24 pb-8 ${GUTTER}`}>
           <h1 className="mb-4 break-words hyphens-auto font-display text-3xl font-bold uppercase leading-none tracking-tight sm:text-4xl md:text-7xl">
             {track.name}

@@ -1,5 +1,6 @@
 import { ChevronsRight } from "lucide-react";
 import { BoardMemberGrid } from "../components/home/BoardMembers";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import Link from "../components/ui/Link";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
@@ -14,6 +15,7 @@ const ContactPage = () => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: "Kontakt" }]} className="mb-6 md:mb-8" />
       <PageHeader
         title="Kontakt"
         intro={page?.intro ?? undefined}

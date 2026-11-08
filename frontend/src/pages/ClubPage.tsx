@@ -2,6 +2,7 @@ import axios from "axios";
 import { Contact as ContactIcon, Globe, Info, MapPin, Package, Palette, type LucideIcon, ChevronsRight } from "lucide-react";
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import ImageSlot from "../components/ui/ImageSlot";
 import Link from "../components/ui/Link";
 import PageHeader from "../components/ui/PageHeader";
@@ -86,6 +87,7 @@ const ClubPage = () => {
   if (loaded && !club) {
     return (
       <Section spacing="page">
+        <Breadcrumb items={[{ label: "Vereine", to: "/vereine" }]} className="mb-6 md:mb-8" />
         <PageHeader title="Verein nicht gefunden" />
         <Link iconRight={ChevronsRight} to="/vereine">zurück zu den Vereinen</Link>
       </Section>
@@ -95,7 +97,8 @@ const ClubPage = () => {
   if (!club) {
     return (
       <Section spacing="page" className="min-h-96 text-muted">
-        Lädt …
+        <Breadcrumb items={[{ label: "Vereine", to: "/vereine" }]} className="mb-6 md:mb-8" />
+        <div>Lädt …</div>
       </Section>
     );
   }
@@ -112,6 +115,9 @@ const ClubPage = () => {
             <img src={mediaUrl(club.vehiclePhoto.url)} alt={`Bild von ${club.name}`} className="w-full h-full object-cover object-[25%_75%]" />
           </div>
         )}
+        <div className={`absolute inset-x-0 top-0 z-10 pt-10 md:pt-16 ${GUTTER}`}>
+          <Breadcrumb items={[{ label: "Vereine", to: "/vereine" }, { label: club.name }]} />
+        </div>
         <div className={`relative flex w-full flex-col items-start gap-4 pt-24 pb-8 sm:flex-row sm:items-end sm:gap-8 ${GUTTER}`}>
           <div className={`flex h-24 w-24 shrink-0 sm:h-36 sm:w-36 items-center justify-center ${club.logo?.url ? "bg-paper p-3" : "border border-line-strong"}`}>
             <ImageSlot src={mediaUrl(club.logo?.url)} alt={`Logo von ${club.name}`} placeholder="Logo" fit="contain" />

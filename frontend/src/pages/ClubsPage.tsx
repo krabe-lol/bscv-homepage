@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ClubCard from "../components/clubs/ClubCard";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import PageHeader from "../components/ui/PageHeader";
 import Section from "../components/ui/Section";
 import { API_URL } from "../lib/api";
@@ -25,6 +26,7 @@ const ClubsPage = () => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: "Vereine" }]} className="mb-6 md:mb-8" />
       <PageHeader
         title="Vereine"
         intro={intro}

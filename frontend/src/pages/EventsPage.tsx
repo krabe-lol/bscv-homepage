@@ -1,4 +1,5 @@
 import TrackCard from "../components/tracks/TrackCard";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import PageHeader from "../components/ui/PageHeader";
 import EventRow from "../components/ui/EventRow";
 import Section from "../components/ui/Section";
@@ -23,6 +24,7 @@ const EventsPage = () => {
 
   return (
     <Section spacing="page">
+      <Breadcrumb items={[{ label: "Renntermine & Rennstrecken" }]} className="mb-6 md:mb-8" />
       <PageHeader
         title="Renntermine & Rennstrecken"
         intro={page?.intro ?? undefined}
