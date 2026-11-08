@@ -84,13 +84,17 @@
   umbenannt, sonst legt Strapi leere neue an und löscht die alten.
 - Uploads sind nicht im Git. Gesichert wird mit `npm run backup` nach
   `backups/` (Datenbank-Dump und Uploads).
+- Desktop-Ansicht (Menü, Layouts) erst ab 1152 px: Breakpoint `lg` ist in
+  `frontend/src/index.css` umgestellt. Seitenrand der Inhalte ab dort 120 px,
+  240 px erst ab 1920 px. Unterseiten zeigen eine Breadcrumb
+  (`components/ui/Breadcrumb.tsx`), Startseite und Wartungsseite nicht.
 
 ## Bekannte Probleme
 - Scheitert der Import von Config Sync beim Start, startet Strapi nicht.
   Notlösung: `bscv_backend/config/sync` auf dem Server umbenennen, Node.js neu
   starten, Fehler im Log suchen.
-- Startseite: Bei ab 1024 px breiten, aber sehr hohen Fenstern (z. B. iPad Pro
-  hochkant, 1024×1366) rutscht die rechte Kachelspalte im Hero unter das Bild
+- Startseite: Bei ab 1152 px breiten, aber sehr hohen Fenstern (iPad Pro
+  hochkant mit 1024 px zeigt seit der Umstellung die Mobil-Ansicht) rutscht die rechte Kachelspalte im Hero unter das Bild
   und wird zu einer riesigen roten Kachel (Breite hängt an `100svh`).
 - konsoleH hat Node.js einmal für bscv.de statt für cms.bscv.de aktiviert.
   Nach Änderungen an der Node.js-Konfiguration prüfen, welche Domain betroffen
