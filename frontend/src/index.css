@@ -5,6 +5,9 @@
   --font-display: "Space Grotesk Variable", Helvetica, Arial, sans-serif;
   --font-mono: "JetBrains Mono Variable", monospace;
 
+  /* Wechsel zwischen Mobil- und Desktop-Ansicht (Menü, Layouts) bei 1152px statt 1024px */
+  --breakpoint-lg: 72rem;
+
   --color-ink: #0B0F17;
   --color-panel: #111722;
   --color-paper: #F4F2EF;
