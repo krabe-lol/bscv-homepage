@@ -3,7 +3,7 @@
 # bleiben unberührt.
 # Auf dev (und beim Start von Hand mit Haken bei „Trockenlauf“) wird nur gebaut und angezeigt, was sich auf dem
 # Server ändern würde; hochgeladen wird dann nichts.
-# Benötigtes Secret (Repository → Einstellungen → Actions → Secrets): DEPLOY_SSH_KEY_B64 = private
+# Benötigte Secrets (Repository → Einstellungen → Actions → Secrets): DEPLOY_HOST, DEPLOY_USER (SFTP-Zugang) und DEPLOY_SSH_KEY_B64 = private
 # Schlüsseldatei (bscv_deploy, ed25519, ohne Passphrase) Base64-kodiert in einer Zeile. Nicht als Klartext ablegen:
 # Mehrzeilige Secrets maskiert Gitea in der env-Anzeige der Logs nicht.
 # Der Runner braucht Docker, weil der Job in einem Container (node:22-bullseye) läuft.
@@ -75,6 +75,8 @@ jobs:
           fi
         env:
           DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
 
       - name: Backend bauen
         run: node scripts/output.mjs --nur-cms $OHNE_NODE_MODULES
@@ -88,6 +90,8 @@ jobs:
           fi
         env:
           DEPLOY_SSH_KEY_B64: ${{ secrets.DEPLOY_SSH_KEY_B64 }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
 
       - name: Hinweis zum Neustart
         if: env.TROCKENLAUF != 'true'

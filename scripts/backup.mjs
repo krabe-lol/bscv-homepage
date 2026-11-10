@@ -28,9 +28,6 @@ import { parseEnv } from "node:util";
 
 const PG_IMAGE = "postgres:17-alpine"; // Client muss mindestens die Server-Version (17) haben
 const LFTP_IMAGE = "alpine:3.20";
-const SFTP_HOST = "REDACTED-HOST";
-const SFTP_PORT = "22";
-const SFTP_USER = "REDACTED-USER";
 const REMOTE_UPLOADS = "bscv_backend/public/uploads";
 const KEEP_DUMPS = 30;
 const MIN_DUMP_BYTES = 10 * 1024; // kleiner ist kein brauchbarer Dump (leere Datenbank hat schon einige KB)
@@ -75,6 +72,11 @@ if (!existsSync(secretsFile)) fail(`${secretsFile} fehlt (Datenbank-Zugangsdaten
 const env = parseEnv(readFileSync(secretsFile, "utf8"));
 const missing = ["DATABASE_HOST", "DATABASE_NAME", "DATABASE_USERNAME", "DATABASE_PASSWORD"].filter((key) => !env[key]);
 if (missing.length) fail(`In ${secretsFile} fehlen: ${missing.join(", ")}`);
+// SFTP-Zugang: Umgebungsvariable oder (lokal, nicht im Git) backend/.env.server
+const SFTP_HOST = process.env.DEPLOY_HOST || env.DEPLOY_HOST;
+const SFTP_USER = process.env.DEPLOY_USER || env.DEPLOY_USER;
+const SFTP_PORT = process.env.DEPLOY_PORT || env.DEPLOY_PORT || "22";
+if (!SFTP_HOST || !SFTP_USER) fail(`DEPLOY_HOST und DEPLOY_USER fehlen (Umgebungsvariable oder in ${secretsFile}).`);
 if (!existsSync(keyFile)) fail(`SSH-Schlüssel ${keyFile} nicht gefunden (Pfad per DEPLOY_SSH_KEY_FILE änderbar).`);
 
 try {

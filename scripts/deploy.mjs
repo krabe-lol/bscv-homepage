@@ -14,9 +14,13 @@ import { homedir, tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const HOST = process.env.DEPLOY_HOST ?? "REDACTED-HOST";
+const HOST = process.env.DEPLOY_HOST;
 const PORT = process.env.DEPLOY_PORT ?? "22";
-const USER = process.env.DEPLOY_USER ?? "REDACTED-USER";
+const USER = process.env.DEPLOY_USER;
+if (!HOST || !USER) {
+  console.error("DEPLOY_HOST und DEPLOY_USER müssen als Umgebungsvariablen gesetzt sein (in CI: Gitea-Secrets).");
+  process.exit(1);
+}
 const WEB_DIR = process.env.DEPLOY_WEB_DIR ?? "public_html/bscv_frontend";
 const CMS_DIR = process.env.DEPLOY_CMS_DIR ?? "bscv_backend";
 const DEFAULT_KEY_FILE = path.join(homedir(), ".ssh", "bscv_deploy");
