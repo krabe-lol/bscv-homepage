@@ -62,13 +62,20 @@
   Komponenten liefert `https://ui.krabe.lol/index.json`, die Doku-Seite jeder
   Komponente zeigt Varianten und Props.
 - Vorhandene Komponenten verwenden (Button, Card, Dialog, Field, Input, Select,
-  Table, Tabs, Sonner, Typography …) und keine eigenen Varianten mit
+  Table, Tabs, Toast, Typography …) und keine eigenen Varianten mit
   abweichendem Aussehen nachbauen.
 - Farben, Abstände, Radien und Schrift kommen aus den Tokens und der
   Typography-Komponente des Design-Systems, nicht aus festen Werten im Code.
 - Fehlt eine Komponente oder Variante, erst Bescheid geben, statt etwas
   Eigenes zu bauen. Neues gehört ins Design-System (mit Story), nicht nur ins
   einzelne Projekt.
+- Ist KrabeUI im Projekt eingebunden, bei jeder neuen Basic-UI-Komponente
+  (Button, Input, Dialog, Badge …) zuerst in KrabeUI nachsehen, ob es sie dort
+  schon gibt, und diese verwenden.
+- Gibt es die Komponente in KrabeUI nicht, immer zuerst nachfragen, ob sie neu
+  in KrabeUI angelegt werden oder direkt im Projekt entstehen soll. Dabei
+  darauf hinweisen, dass KrabeUI bevorzugt wird, weil es die Oberflächen
+  vereinheitlicht. Nicht ungefragt im Projekt bauen.
 
 ## Git
 - Standard-Branch ist `main`.
@@ -160,6 +167,11 @@ Nicht jeden einzelnen Commit taggen – Tags markieren Feature-Meilensteine
   Docker Desktop).
 - Commits vor dem 28.10.2026 sind auf Deutsch und mit `Co-Authored-By`. Ab
   dann gelten die Git-Regeln oben, nicht der alte Stil.
+- Die Schnittstelle für Papierstau (`/api/papierstau/*`, Code in
+  `backend/src/api/papierstau/` und `backend/src/papierstau/`) ist in
+  `PAPIERSTAU-API.md` beschrieben. Wird ein Endpunkt, ein Feld, ein
+  Statuscode oder das Verhalten des Abgleichs geändert, im selben Commit die
+  Doku anpassen und unter „Änderungen“ eintragen.
 - BSCV ist kein privates krabe.lol-Projekt. Die Abschnitte „UI /
   Design-System“ und „Versionierung“ gelten hier nicht: eigenes Design und
   eigene Versionsstände sind gewollt, kein automatischer Versions-Bump.

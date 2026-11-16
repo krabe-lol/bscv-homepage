@@ -1,6 +1,6 @@
 # BSCV-CMS: Inhaltstypen und Felder
 
-Stand: 28.10.2026. Bei Änderungen an den Schemas in `backend/src` mit aktualisieren.
+Stand: 16.11.2026. Bei Änderungen an den Schemas in `backend/src` mit aktualisieren.
 
 ## So liest du die Tabellen
 
@@ -10,6 +10,10 @@ Jeder Inhaltstyp hat zwei Namen: den deutschen im Admin (cms.bscv.de) und den te
 - **Feldname** = was im Code und in der API steht.
 - Einheitlich benannt: `name` für Personen, Orte und Vereine, `title` für Inhalte und Dokumente, `position` für die Reihenfolge.
 - Stand: lokaler Entwicklungsstand inkl. der noch nicht deployten Umbenennungen.
+- **Aus Papierstau** (Branch `tortoc-work`, noch nicht live): Felder mit „PS“ in der Spalte Zweck setzt der Abgleich mit
+  Papierstau und überschreibt sie dabei. `papierstauId` (Kennung in Papierstau, im Admin nicht bearbeitbar) und
+  `papierstauSync` (Fingerabdrücke und IDs der übernommenen Dateien, im Admin und in der API unsichtbar) gibt es bei
+  Verein, Veranstaltung und Punktewertung.
 
 ## Einzel-Einträge
 
@@ -141,9 +145,13 @@ Sammlungen haben beliebig viele Einträge, z. B. einen pro Verein. Der technisch
 
 | Beschriftung | Feldname | Typ | Zweck |
 | --- | --- | --- | --- |
-| Name | `title` | Text | Linktext der Wertung |
-| Sortierung | `position` | Zahl | Reihenfolge |
-| PDF-Datei | `pdf` | Medien | PDF zum Öffnen |
+| Name | `title` | Text | Linktext der Wertung (PS: Name der Klasse) |
+| Sortierung | `position` | Zahl | Reihenfolge (PS: innerhalb der Saison) |
+| PDF-Datei | `pdf` | Medien | PDF zum Öffnen (PS: PDF aus Papierstau) |
+| Saison | `season` | Text | PS: Name der Saison, gruppiert die Seite |
+| Saisonbeginn | `seasonStart` | Datum | PS: Sortierung der Saisons |
+| Klasse | `className` | Text | PS: Name der Klasse |
+| Tabelle | `table` | JSON | PS: Wertungsläufe und Zeilen (Platz, Name, Verein, Punkte je Lauf, Gesamt); ohne Tabelle nur PDF-Link |
 
 ### Rennstrecke · `tracks`
 
@@ -169,25 +177,31 @@ Sammlungen haben beliebig viele Einträge, z. B. einen pro Verein. Der technisch
 
 | Beschriftung | Feldname | Typ | Zweck |
 | --- | --- | --- | --- |
-| – | `title` | Text | Name des Rennens |
-| – | `date` | Datum | Termin, bestimmt das nächste Rennen |
+| – | `title` | Text | Name des Rennens (PS legt ihn beim Anlegen an: Ort oder Veranstalter, danach Redaktion) |
+| – | `date` | Datum | Termin, bestimmt das nächste Rennen (PS) |
 | – | `track` | Relation → Rennstrecke | Strecke des Rennens |
-| – | `organizer` | Relation → Verein | ausrichtender Verein |
+| – | `organizer` | Relation → Verein | ausrichtender Verein (PS) |
+| Veranstalter (Text) | `organizerName` | Text | PS: Veranstalter, wenn der Verein nicht auf bscv.de gezeigt wird |
+| Ort | `location` | Text | PS: Ort, angezeigt wenn keine Strecke zugeordnet ist |
+| Nennschluss | `entryDeadline` | Datum | PS: bei kommenden Rennen unter dem Datum |
+| Endlauf | `seasonFinal` | Ja/Nein | PS: Kennzeichen „Endlauf“ |
+| Klassen | `classes` | JSON | PS: Klassen der Läufe (noch nicht angezeigt) |
+| Dokumente | `documents` | Medien (mehrere) | PS: Ausschreibungen, Links bei kommenden Rennen |
 | – | `albums` | Relation → Album | Galerie-Links bei vergangenen Rennen |
 
 ### Verein · `clubs`
 
 | Beschriftung | Feldname | Typ | Zweck |
 | --- | --- | --- | --- |
-| Vereinsname | `name` | Text | Name in Liste und auf der Vereinsseite |
+| Vereinsname | `name` | Text | Name in Liste und auf der Vereinsseite (PS) |
 | Sortierungsname | `sortName` | Text | Sortierung der Vereinsliste |
 | Standort | `location` | Text | wird nicht angezeigt |
-| Website | `website` | Text | Link zur Vereinswebsite |
-| Vereinslogo | `logo` | Medien | Logo in Liste und auf der Vereinsseite |
+| Website | `website` | Text | Link zur Vereinswebsite (PS) |
+| Vereinslogo | `logo` | Medien | Logo in Liste und auf der Vereinsseite (PS, ohne Logo in Papierstau bleibt ein vorhandenes stehen) |
 | Über den Verein | `about` | Richtext | Vorstellungstext |
-| Kennzahlen | `stats` | Komponente Kennzahl (mehrere) | unter dem Vorstellungstext; Gründungsjahr und Aktive Fahrer sind vorgegeben |
-| Vorstand | `president` | Komponente Anschrift | Kontakt „1. Vorstand“ |
-| Versandanschrift | `mailingAddress` | Komponente Anschrift | Kontakt „Versandanschrift“ |
+| Kennzahlen | `stats` | Komponente Kennzahl (mehrere) | unter dem Vorstellungstext; Gründungsjahr und Aktive Fahrer sind vorgegeben (PS setzt deren Werte, die übrigen pflegt die Redaktion) |
+| Vorstand | `president` | Komponente Anschrift | Kontakt „1. Vorstand“ (PS) |
+| Versandanschrift | `mailingAddress` | Komponente Anschrift | Kontakt „Versandanschrift“ (PS) |
 | Fahrzeugfoto | `vehiclePhoto` | Medien | Foto in der Liste und oben auf der Vereinsseite |
 | Fahrzeug | `vehicleGraphic` | Medien | Grafik Front/Seite bei den Vereinsfarben |
 | – | `colors` | Komponente Farbe (mehrere) | Vereinsfarben als Farbfelder |
@@ -234,6 +248,7 @@ Komponenten sind Feldgruppen, die in mehreren Typen stecken, z. B. eine Anschrif
 | Festnetz | `phone` | Text | „Tel:“ |
 | Handy | `mobile` | Text | „Mobil:“ |
 | E-Mail-Adresse | `email` | E-Mail | Mail-Link |
+| Fax | `fax` | Text | „Fax“ |
 
 ### Farbe · `color`
 

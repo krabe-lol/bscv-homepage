@@ -8,6 +8,62 @@
   Der erste echte Deploy war erfolgreich, `.env` und Uploads blieben unberührt.
 
 ## Offene Aufgaben
+- Branch `tortoc-work`: Anbindung an Papierstau (krabe-lol/papierstau).
+  Papierstau ist die Quelle für Vereine, Renntermine und Punktewertung,
+  Übernommenes erscheint sofort veröffentlicht. Papierstau ist noch nicht
+  live, bscv.de bereitet nur vor. Anforderungen an Papierstau: dort
+  `docs/betrieb/anforderungen-bscv-de.md` (Branch `tortoc-work`).
+  **Umgesetzt, noch nicht committet:**
+  - Backend: `src/papierstau/` (Client, Abbildung, Medien, Abgleich),
+    `POST /api/papierstau/sync` (Token `PAPIERSTAU_SYNC_TOKEN`, ohne Daten,
+    antwortet 202, Abgleich im Hintergrund, nie zwei gleichzeitig),
+    nächtlicher Abgleich 3 Uhr (`config/cron-tasks.ts`). Einstellungen in
+    `config/papierstau.ts`, Variablen in `backend/.env.example`. Neue Felder
+    siehe `CMS.md` („PS“), Ansichten per Config Sync exportiert.
+  - Schnittstelle für Papierstau ausführlich in `PAPIERSTAU-API.md`
+    (bei jeder Änderung nachziehen, Regel in `CLAUDE.md`).
+  - Rückmeldung an Papierstau (gleicher Token): `POST /sync` liefert eine
+    `runId`; `GET /api/papierstau/runs[/:id]` zeigt den Lauf (queued,
+    running, succeeded, partial, failed) mit Zählern und Fehlern je Eintrag,
+    die letzten 20 Läufe überstehen einen Neustart (Core-Store).
+    `GET /api/papierstau/state` liefert je `papierstauId` `published`,
+    `sourceHash` und `syncedAt`. `sourceHash` ist SHA-256 über das kanonische
+    JSON (Schlüssel sortiert, ohne Leerzeichen) des Eintrags, wie Papierstau
+    ihn geliefert hat; Papierstau rechnet denselben Wert über seine
+    API-Antwort und erkennt so veraltete oder fehlende Einträge.
+  - Dateien aus Papierstau werden am Inhalt geprüft (Signatur muss zum
+    gemeldeten Typ passen), weil Strapi das beim Ablegen aus dem Code nicht
+    tut.
+  - Zuordnung: `papierstauId`; beim ersten Abgleich Vereine über den Namen,
+    Rennen über das Datum (nur wenn eindeutig). Was Papierstau nicht mehr
+    liefert, wird zurückgezogen, nicht gelöscht; liefert Papierstau eine leere
+    Liste oder ist es nicht erreichbar, wird nichts zurückgezogen. Unveränderte
+    Einträge werden nicht geschrieben (Fingerabdruck in `papierstauSync`).
+    Dateien (Logo, Ausschreibungen, PDF der Wertung) nur bei geändertem
+    Inhalt neu, ersetzte Dateien des Abgleichs werden gelöscht.
+  - Frontend: Punktewertung als Tabelle je Klasse (aktuelle Saison offen,
+    Archiv darunter, PDF-Link), von Hand gepflegte PDF-Wertungen als „Weitere
+    Wertungen“. Renntermine: Ort ohne Strecke, Veranstalter als Text,
+    Endlauf, Nennschluss und Ausschreibungen bei kommenden Rennen. Fax bei
+    den Kontakten der Vereine.
+  - Getestet gegen einen Papierstau-Mock (Doku-Format inkl. BSCV-21 und
+    BSCV-28) mit einer Kopie der lokalen Datenbank: Anlegen, Zuordnen über den
+    Namen, unverändert, Ändern von Logo/Dokument/PDF, Zurückziehen, leere
+    Liste, Papierstau nicht erreichbar, Token- und Eingabeprüfung,
+    Warteschlange, Status `partial`, `sourceHash` unabhängig in Python
+    nachgerechnet (stimmt überein). Frontend:
+    Lint und Build ok, Sichtprüfung Desktop und Handy.
+  **Offen:** Test gegen die echte Testinstanz (`papierstau.krabe.lol`, braucht
+  Schlüssel und Erreichbarkeit); erst danach Felder im Admin sperren, die
+  Papierstau gehören (jetzt noch nicht, weil die Redaktion live bis zum
+  Go-live von Hand pflegt); `classes` anzeigen. Die lokale `.tmp/data.db` ist
+  veraltet (deutsche Tabellennamen, Rechte fehlen), Strapi migriert sie beim
+  nächsten Start.
+  Entschieden: Strecken, Vereinstexte, Farben, Sortiername und Fotos bleiben
+  in Strapi. Das PDF der Wertung erzeugt Papierstau (setzt tortoc dort
+  selbst um), Strapi übernimmt es. Vorgemerkt für später: Rennergebnisse je
+  Lauf, Live-Ergebnisse am Renntag, Gebühren, Fristen, Zahlen für „Der
+  BSCV“. Clutch-Bestenliste entfällt.
 - Config Sync und schnellerer Backend-Deploy sind auf `dev` committet, noch
   nicht deployt. Vor dem ersten Deploy auf `main` `npm run backup`: Beim ersten
   Start überschreibt Strapi live alle Ansichten und die Rechte von Public und
