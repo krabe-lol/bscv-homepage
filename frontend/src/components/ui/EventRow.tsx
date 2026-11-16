@@ -1,4 +1,4 @@
-import { Flag, MapPin } from "lucide-react";
+import { FileText, Flag, MapPin } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import { formatDate, formatWeekdayShort } from "../../lib/format";
@@ -26,6 +26,34 @@ const MetaLink = ({ to, label, icon: Icon, className }: { to: string; label: str
   </div>
 );
 
+// Wie MetaLink, aber ohne Ziel (Ort oder Veranstalter ohne eigene Seite)
+const MetaText = ({ label, icon: Icon }: { label: string; icon: LucideIcon }) => (
+  <div title={label} className="flex min-w-0 items-center gap-1.5">
+    <Icon className="h-[1em] w-[1em] shrink-0" aria-hidden />
+    <span className="block min-w-0 truncate">{label}</span>
+  </div>
+);
+
+// Dokumente der Veranstaltung (z. B. Ausschreibung), Name ohne Endung
+const DocumentLinks = ({ documents }: { documents: Event["documents"] }) => {
+  const list = documents ?? [];
+  if (list.length === 0) return null;
+  return (
+    <div className="flex min-w-0 flex-col gap-1">
+      {list.map((doc) => {
+        const label = doc.name.replace(/\.[a-z0-9]{1,5}$/i, "");
+        return (
+          <span key={doc.id} title={label} className="min-w-0 truncate">
+            <Link href={mediaUrl(doc.url)} external iconLeft={FileText}>
+              {label}
+            </Link>
+          </span>
+        );
+      })}
+    </div>
+  );
+};
+
 // Vollständige Klassennamen, damit Tailwind sie findet
 const GRID = {
   md: "py-4 lg:grid-cols-[150px_minmax(0,1fr)_minmax(0,190px)_minmax(0,240px)_110px]",
@@ -38,7 +66,7 @@ const EventRow = ({ event, variant = "default", size = "md", subtitle, action }:
   const past = !highlight && event.date < today;
   const titleTone = highlight ? "text-on-brand" : past ? "text-body" : "text-paper";
   const metaTone = highlight ? "text-on-brand" : past ? "text-dim" : "text-muted";
-  const { track, organizer } = event;
+  const { track, organizer, organizerName, location } = event;
   const big = size === "lg";
   const photo = track?.photo;
 
@@ -48,9 +76,14 @@ const EventRow = ({ event, variant = "default", size = "md", subtitle, action }:
         highlight ? "bg-brand" : "hover:bg-panel"
       }`}
     >
-      <time dateTime={event.date} className={`whitespace-nowrap font-mono ${big ? "text-base" : "text-sm"} ${metaTone}`}>
-        {formatWeekdayShort(event.date)}, {formatDate(event.date)}
-      </time>
+      <div className={`font-mono ${metaTone}`}>
+        <time dateTime={event.date} className={`whitespace-nowrap ${big ? "text-base" : "text-sm"}`}>
+          {formatWeekdayShort(event.date)}, {formatDate(event.date)}
+        </time>
+        {!past && event.entryDeadline && (
+          <div className="whitespace-nowrap text-xs">Nennschluss {formatDate(event.entryDeadline)}</div>
+        )}
+      </div>
 
       <div className="flex min-w-0 items-center gap-3">
         <span
@@ -59,22 +92,31 @@ const EventRow = ({ event, variant = "default", size = "md", subtitle, action }:
         >
           {eventTitle(event)}
         </span>
+        {event.seasonFinal && (
+          <span className={`shrink-0 border px-1.5 py-0.5 font-mono text-xs uppercase ${highlight ? "border-on-brand text-on-brand" : "border-accent text-accent"}`}>
+            Endlauf
+          </span>
+        )}
       </div>
 
       {/* Ab lg direkte Grid-Spalten, darunter eine umbrechende Zeile unter dem Titel */}
       <div className={`col-start-1 flex flex-wrap gap-x-5 gap-y-1 ${big ? "text-base" : "text-sm"} sm:col-start-2 lg:contents ${metaTone}`}>
         {track?.name ? (
           <MetaLink to={`/rennstrecken/${track.documentId}`} label={track.name} icon={MapPin} className={metaTone} />
+        ) : location ? (
+          <MetaText label={location} icon={MapPin} />
         ) : (
           <div className="hidden lg:block" />
         )}
         {organizer?.name ? (
           <MetaLink to={`/vereine/${organizer.documentId}`} label={organizer.name} icon={Flag} className={metaTone} />
+        ) : organizerName ? (
+          <MetaText label={organizerName} icon={Flag} />
         ) : (
           <div className="hidden lg:block" />
         )}
-        <div className="flex items-center gap-4 whitespace-nowrap">
-          {past && <GalleryLinks albums={event.albums} />}
+        <div className="flex min-w-0 items-center gap-4 whitespace-nowrap">
+          {past ? <GalleryLinks albums={event.albums} /> : <DocumentLinks documents={event.documents} />}
           {action}
         </div>
         {big &&

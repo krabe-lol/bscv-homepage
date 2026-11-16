@@ -1,6 +1,6 @@
 import type { Event } from "./types";
 
-const ALL = "pagination[pageSize]=200&sort=date:desc&populate[organizer][fields][0]=name&populate[track][fields][0]=name&populate[track][populate][photo][fields][0]=url&populate[albums][fields][0]=title&populate[albums][fields][1]=galleryUrl";
+const ALL = "pagination[pageSize]=200&sort=date:desc&populate[organizer][fields][0]=name&populate[track][fields][0]=name&populate[track][populate][photo][fields][0]=url&populate[albums][fields][0]=title&populate[albums][fields][1]=galleryUrl&populate[documents][fields][0]=url&populate[documents][fields][1]=name";
 export const EVENTS_PATH = `events?${ALL}`;
 
 export const eventTitle = (event: Event) => event.title.replace(" - ", " – ");

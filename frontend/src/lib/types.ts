@@ -20,6 +20,7 @@ export interface Contact {
   address?: Address | null;
   phone?: string | null;
   mobile?: string | null;
+  fax?: string | null;
   email?: string | null;
 }
 
@@ -78,7 +79,28 @@ export interface Event {
   date: string;
   track?: Pick<Track, "documentId" | "name" | "photo"> | null;
   organizer?: Pick<Club, "documentId" | "name"> | null;
+  /** Veranstalter als Text, wenn der Verein nicht auf bscv.de gezeigt wird (aus Papierstau) */
+  organizerName?: string | null;
+  /** Ort laut Papierstau, wenn keine Rennstrecke zugeordnet ist */
+  location?: string | null;
+  entryDeadline?: string | null;
+  seasonFinal?: boolean | null;
+  classes?: string[] | null;
+  documents?: (Pick<StrapiMedia, "url"> & { id: number; name: string })[] | null;
   albums?: Pick<Album, "documentId" | "title" | "galleryUrl">[] | null;
+}
+
+/** Saisonwertung einer Klasse aus Papierstau */
+export interface StandingTable {
+  events: { id: string; date: string; location: string | null }[];
+  rows: {
+    place: number;
+    lastName: string;
+    firstName: string;
+    club: string;
+    pointsPerEvent: Record<string, number>;
+    total: number;
+  }[];
 }
 
 export interface Standing {
@@ -87,6 +109,11 @@ export interface Standing {
   position?: number | null;
   updatedAt: string;
   pdf?: StrapiMedia | null;
+  /** Nur bei Wertungen aus Papierstau gesetzt */
+  season?: string | null;
+  seasonStart?: string | null;
+  className?: string | null;
+  table?: StandingTable | null;
 }
 
 export interface BoardMember {

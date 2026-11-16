@@ -36,7 +36,7 @@ const Card = ({ title, icon: Icon, className = "", children }: { title: string; 
 
 const ContactCard = ({ title, icon, contact }: { title: string; icon: LucideIcon; contact?: Contact | null }) => {
   if (!contact) return null;
-  const { name, address, phone, mobile, email } = contact;
+  const { name, address, phone, mobile, fax, email } = contact;
   return (
     <Card title={title} icon={icon}>
       <div className="flex flex-col gap-3 text-sm text-body">
@@ -48,9 +48,9 @@ const ContactCard = ({ title, icon, contact }: { title: string; icon: LucideIcon
             {address?.city}
           </div>
         )}
-        {(phone || mobile) && (
+        {(phone || mobile || fax) && (
           <div>
-            {[phone, mobile].filter(Boolean).map((n) => (
+            {[phone, mobile, fax && `Fax ${fax}`].filter(Boolean).map((n) => (
               <Fragment key={n}>
                 {n}
                 <br />

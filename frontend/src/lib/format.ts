@@ -8,3 +8,6 @@ export const formatWeekdayShort = (iso: string) =>
   new Date(iso).toLocaleDateString("de-DE", { weekday: "short" }).replace(".", "");
 
 export const formatLength = (m: number) => `${m.toLocaleString("de-DE")} m`;
+
+export const formatDayMonth = (iso: string) =>
+  new Date(iso).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit" });
