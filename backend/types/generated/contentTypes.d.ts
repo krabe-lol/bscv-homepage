@@ -555,6 +555,8 @@ export interface ApiClubClub extends Struct.CollectionTypeSchema {
     logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     mailingAddress: Schema.Attribute.Component<'contact.contact', false>;
     name: Schema.Attribute.String;
+    papierstauId: Schema.Attribute.String;
+    papierstauSync: Schema.Attribute.JSON & Schema.Attribute.Private;
     president: Schema.Attribute.Component<'contact.contact', false>;
     publishedAt: Schema.Attribute.DateTime;
     sortName: Schema.Attribute.String;
@@ -674,15 +676,23 @@ export interface ApiEventEvent extends Struct.CollectionTypeSchema {
   };
   attributes: {
     albums: Schema.Attribute.Relation<'oneToMany', 'api::album.album'>;
+    classes: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date;
+    documents: Schema.Attribute.Media<'files' | 'images', true>;
+    entryDeadline: Schema.Attribute.Date;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::event.event'> &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
     organizer: Schema.Attribute.Relation<'manyToOne', 'api::club.club'>;
+    organizerName: Schema.Attribute.String;
+    papierstauId: Schema.Attribute.String;
+    papierstauSync: Schema.Attribute.JSON & Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    seasonFinal: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     title: Schema.Attribute.String;
     track: Schema.Attribute.Relation<'manyToOne', 'api::track.track'>;
     updatedAt: Schema.Attribute.DateTime;
@@ -1009,6 +1019,7 @@ export interface ApiStandingStanding extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    className: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1018,9 +1029,14 @@ export interface ApiStandingStanding extends Struct.CollectionTypeSchema {
       'api::standing.standing'
     > &
       Schema.Attribute.Private;
+    papierstauId: Schema.Attribute.String;
+    papierstauSync: Schema.Attribute.JSON & Schema.Attribute.Private;
     pdf: Schema.Attribute.Media<'files'>;
     position: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    season: Schema.Attribute.String;
+    seasonStart: Schema.Attribute.Date;
+    table: Schema.Attribute.JSON;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

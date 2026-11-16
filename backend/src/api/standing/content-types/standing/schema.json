@@ -23,6 +23,25 @@
       "allowedTypes": [
         "files"
       ]
+    },
+    "season": {
+      "type": "string"
+    },
+    "seasonStart": {
+      "type": "date"
+    },
+    "className": {
+      "type": "string"
+    },
+    "table": {
+      "type": "json"
+    },
+    "papierstauId": {
+      "type": "string"
+    },
+    "papierstauSync": {
+      "type": "json",
+      "private": true
     }
   }
 }

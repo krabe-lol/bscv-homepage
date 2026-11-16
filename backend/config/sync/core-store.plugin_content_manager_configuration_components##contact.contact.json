@@ -90,6 +90,20 @@
           "sortable": true
         }
       },
+      "fax": {
+        "edit": {
+          "label": "Fax",
+          "description": "",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Fax",
+          "searchable": true,
+          "sortable": true
+        }
+      },
       "documentId": {
         "edit": {},
         "list": {
@@ -132,6 +146,12 @@
           },
           {
             "name": "mobile",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "fax",
             "size": 6
           }
         ]

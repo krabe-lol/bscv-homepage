@@ -62,6 +62,90 @@
           "sortable": false
         }
       },
+      "season": {
+        "edit": {
+          "label": "Saison",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Saison",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "seasonStart": {
+        "edit": {
+          "label": "Saisonbeginn",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Saisonbeginn",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "className": {
+        "edit": {
+          "label": "Klasse",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Klasse",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "table": {
+        "edit": {
+          "label": "Tabelle",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Tabelle",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "papierstauId": {
+        "edit": {
+          "label": "Papierstau-ID",
+          "description": "Kennung des Eintrags in Papierstau, setzt der Abgleich.",
+          "placeholder": "",
+          "visible": true,
+          "editable": false
+        },
+        "list": {
+          "label": "Papierstau-ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "papierstauSync": {
+        "edit": {
+          "label": "papierstauSync",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": false
+        },
+        "list": {
+          "label": "papierstauSync",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -150,6 +234,32 @@
         [
           {
             "name": "pdf",
+            "size": 6
+          },
+          {
+            "name": "season",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "seasonStart",
+            "size": 4
+          },
+          {
+            "name": "className",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "table",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "papierstauId",
             "size": 6
           }
         ]

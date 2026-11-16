@@ -22,6 +22,9 @@
     },
     "email": {
       "type": "email"
+    },
+    "fax": {
+      "type": "string"
     }
   },
   "config": {}

@@ -9,6 +9,14 @@
     "date": { "type": "date" },
     "track": { "type": "relation", "relation": "manyToOne", "target": "api::track.track" },
     "organizer": { "type": "relation", "relation": "manyToOne", "target": "api::club.club" },
-    "albums": { "type": "relation", "relation": "oneToMany", "target": "api::album.album", "mappedBy": "event" }
+    "albums": { "type": "relation", "relation": "oneToMany", "target": "api::album.album", "mappedBy": "event" },
+    "organizerName": { "type": "string" },
+    "location": { "type": "string" },
+    "entryDeadline": { "type": "date" },
+    "seasonFinal": { "type": "boolean", "default": false },
+    "classes": { "type": "json" },
+    "documents": { "type": "media", "multiple": true, "allowedTypes": ["files", "images"] },
+    "papierstauId": { "type": "string" },
+    "papierstauSync": { "type": "json", "private": true }
   }
 }

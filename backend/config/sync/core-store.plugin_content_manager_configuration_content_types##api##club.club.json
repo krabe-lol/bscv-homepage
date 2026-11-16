@@ -188,6 +188,34 @@
           "sortable": false
         }
       },
+      "papierstauId": {
+        "edit": {
+          "label": "Papierstau-ID",
+          "description": "Kennung des Eintrags in Papierstau, setzt der Abgleich.",
+          "placeholder": "",
+          "visible": true,
+          "editable": false
+        },
+        "list": {
+          "label": "Papierstau-ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "papierstauSync": {
+        "edit": {
+          "label": "papierstauSync",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": false
+        },
+        "list": {
+          "label": "papierstauSync",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -327,6 +355,12 @@
           {
             "name": "colors",
             "size": 12
+          }
+        ],
+        [
+          {
+            "name": "papierstauId",
+            "size": 6
           }
         ]
       ]

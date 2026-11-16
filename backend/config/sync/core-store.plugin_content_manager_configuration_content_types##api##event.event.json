@@ -93,6 +93,118 @@
           "sortable": false
         }
       },
+      "organizerName": {
+        "edit": {
+          "label": "Veranstalter (Text)",
+          "description": "Veranstalter, wenn der Verein nicht auf bscv.de gezeigt wird. Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Veranstalter (Text)",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "location": {
+        "edit": {
+          "label": "Ort",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Ort",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "entryDeadline": {
+        "edit": {
+          "label": "Nennschluss",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Nennschluss",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "seasonFinal": {
+        "edit": {
+          "label": "Endlauf",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Endlauf",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "classes": {
+        "edit": {
+          "label": "Klassen",
+          "description": "Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Klassen",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "documents": {
+        "edit": {
+          "label": "Dokumente",
+          "description": "Ausschreibungen u. Ä. Kommt aus Papierstau und wird beim Abgleich überschrieben.",
+          "placeholder": "",
+          "visible": true,
+          "editable": true
+        },
+        "list": {
+          "label": "Dokumente",
+          "searchable": false,
+          "sortable": false
+        }
+      },
+      "papierstauId": {
+        "edit": {
+          "label": "Papierstau-ID",
+          "description": "Kennung des Eintrags in Papierstau, setzt der Abgleich.",
+          "placeholder": "",
+          "visible": true,
+          "editable": false
+        },
+        "list": {
+          "label": "Papierstau-ID",
+          "searchable": true,
+          "sortable": true
+        }
+      },
+      "papierstauSync": {
+        "edit": {
+          "label": "papierstauSync",
+          "description": "",
+          "placeholder": "",
+          "visible": false,
+          "editable": false
+        },
+        "list": {
+          "label": "papierstauSync",
+          "searchable": false,
+          "sortable": false
+        }
+      },
       "createdAt": {
         "edit": {
           "label": "createdAt",
@@ -191,6 +303,42 @@
           },
           {
             "name": "albums",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "organizerName",
+            "size": 6
+          },
+          {
+            "name": "location",
+            "size": 6
+          }
+        ],
+        [
+          {
+            "name": "entryDeadline",
+            "size": 4
+          },
+          {
+            "name": "seasonFinal",
+            "size": 4
+          }
+        ],
+        [
+          {
+            "name": "classes",
+            "size": 12
+          }
+        ],
+        [
+          {
+            "name": "documents",
+            "size": 6
+          },
+          {
+            "name": "papierstauId",
             "size": 6
           }
         ]

@@ -73,6 +73,13 @@
       "type": "component",
       "component": "color.color",
       "repeatable": true
+    },
+    "papierstauId": {
+      "type": "string"
+    },
+    "papierstauSync": {
+      "type": "json",
+      "private": true
     }
   }
 }

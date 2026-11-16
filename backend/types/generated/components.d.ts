@@ -46,6 +46,7 @@ export interface ContactContact extends Struct.ComponentSchema {
   attributes: {
     address: Schema.Attribute.Component<'address.address', false>;
     email: Schema.Attribute.Email;
+    fax: Schema.Attribute.String;
     mobile: Schema.Attribute.String;
     name: Schema.Attribute.String;
     phone: Schema.Attribute.String;

@@ -1,4 +1,5 @@
 import type { Core } from '@strapi/strapi';
+import cronTasks from './cron-tasks';
 
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server => ({
   host: env('HOST', '0.0.0.0'),
@@ -12,6 +13,10 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Server =>
   proxy: {
     koa: env.bool('IS_PROXIED', false),
     maxIpsCount: env.int('MAX_IPS_COUNT', 1),
+  },
+  cron: {
+    enabled: true,
+    tasks: cronTasks,
   },
 });
 
